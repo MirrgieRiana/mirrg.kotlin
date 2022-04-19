@@ -15,7 +15,8 @@ jobs:
         java-version: 11
         distribution: adopt
 
+    - uses: actions/checkout@v2
+
     - name: Build
       run: |
-        ls -la
         bash gradlew build
