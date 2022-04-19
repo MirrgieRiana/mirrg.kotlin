@@ -17,4 +17,5 @@ jobs:
 
     - name: Build
       run: |
+        ls -la
         bash gradlew build
