@@ -11,6 +11,8 @@ jobs:
     steps:
 
     - uses: actions/setup-java@v2
+      with:
+        java-version: 11
 
     - name: Build
       run: |
