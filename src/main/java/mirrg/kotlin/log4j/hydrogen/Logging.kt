@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package mirrg.kotlin.log4j.hydrogen
 
 import org.apache.logging.log4j.LogManager

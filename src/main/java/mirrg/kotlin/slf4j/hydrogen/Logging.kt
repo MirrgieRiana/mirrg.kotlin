@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package mirrg.kotlin.slf4j.hydrogen
 
 import org.slf4j.Logger

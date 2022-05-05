@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package mirrg.kotlin.hydrogen
 
 infix fun Byte.atMost(other: Byte) = coerceAtMost(other)
