@@ -12,5 +12,5 @@ class LangTest {
     }
 
     @Suppress("unused", "UNUSED_EXPRESSION")
-    private fun method1() = unit { 10 }
+    private fun unitTestMethod1() = unit { 10 }
 }
