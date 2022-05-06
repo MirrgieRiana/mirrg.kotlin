@@ -5,6 +5,16 @@ import org.junit.Test
 
 class StringTest {
     @Test
+    fun not_OrNullTest() {
+        assertEquals("a", "a".notEmptyOrNull)
+        assertEquals("a", "a".notBlankOrNull)
+        assertEquals(" \r\n\t", " \r\n\t".notEmptyOrNull)
+        assertEquals(null, " \r\n\t".notBlankOrNull)
+        assertEquals(null, "".notEmptyOrNull)
+        assertEquals(null, "".notBlankOrNull)
+    }
+
+    @Test
     fun joinTest() {
         assertEquals("a, b, c", listOf("a", "b", "c").asIterable().join())
         assertEquals("a, b, c", listOf("a", "b", "c").toTypedArray().join())

@@ -3,6 +3,10 @@
 package mirrg.kotlin.hydrogen
 
 
+val String.notEmptyOrNull get() = ifEmpty { null }
+val String.notBlankOrNull get() = ifBlank { null }
+
+
 // toStringを呼び出さないjoin
 
 fun <T : CharSequence> Iterable<T>.join(separator: CharSequence = ", ") = joinToString(separator)
