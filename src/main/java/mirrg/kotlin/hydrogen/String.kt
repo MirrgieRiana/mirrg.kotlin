@@ -19,3 +19,9 @@ fun String.toUpperCaseHead() = if (isEmpty()) this else take(1).toUpperCase() + 
 
 /** 先頭の文字のみを小文字にします。 */
 fun String.toLowerCaseHead() = if (isEmpty()) this else take(1).toLowerCase() + drop(1)
+
+/** @receiver スネークケースの文字列 */
+fun String.toUpperCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = split(beforeDelimiter).map { it.toUpperCaseHead() }.join(afterDelimiter)
+
+/** @receiver スネークケースの文字列 */
+fun String.toLowerCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = split(beforeDelimiter).mapIndexed { i, it -> if (i == 0) it else it.toUpperCaseHead() }.join(afterDelimiter)

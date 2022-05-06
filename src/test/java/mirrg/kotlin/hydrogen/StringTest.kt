@@ -36,6 +36,23 @@ class StringTest {
         assertEquals("a", "a".toLowerCaseHead())
         assertEquals("a", "A".toLowerCaseHead())
         assertEquals("", "".toLowerCaseHead())
+    }
 
+    @Test
+    fun to_CamelCase() {
+        assertEquals("Abc123abcAbc-abcAbc", "abc_123abc_abc-abc_Abc".toUpperCamelCase())
+        assertEquals("abc123abcAbc-abcAbc", "abc_123abc_abc-abc_Abc".toLowerCamelCase())
+        assertEquals("Abc123abcAbc-abcAbc", "Abc_123abc_abc-abc_Abc".toUpperCamelCase())
+        assertEquals("Abc123abcAbc-abcAbc", "Abc_123abc_abc-abc_Abc".toLowerCamelCase())
+
+        assertEquals("Abc123abcAbc_abcAbc", "abc-123abc-abc_abc-Abc".toUpperCamelCase("-"))
+        assertEquals("abc123abcAbc_abcAbc", "abc-123abc-abc_abc-Abc".toLowerCamelCase("-"))
+        assertEquals("Abc123abcAbc_abcAbc", "Abc-123abc-abc_abc-Abc".toUpperCamelCase("-"))
+        assertEquals("Abc123abcAbc_abcAbc", "Abc-123abc-abc_abc-Abc".toLowerCamelCase("-"))
+
+        assertEquals("Abc.123abc.Abc-abc.Abc", "abc_123abc_abc-abc_Abc".toUpperCamelCase("_", "."))
+        assertEquals("abc.123abc.Abc-abc.Abc", "abc_123abc_abc-abc_Abc".toLowerCamelCase("_", "."))
+        assertEquals("Abc.123abc.Abc-abc.Abc", "Abc_123abc_abc-abc_Abc".toUpperCamelCase("_", "."))
+        assertEquals("Abc.123abc.Abc-abc.Abc", "Abc_123abc_abc-abc_Abc".toLowerCamelCase("_", "."))
     }
 }
