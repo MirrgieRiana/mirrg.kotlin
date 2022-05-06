@@ -5,7 +5,7 @@ import org.junit.Test
 
 class StringTest {
     @Test
-    fun `to-CaseHeadTest`() {
+    fun to_CaseHeadTest() {
         assertEquals("AbcAbc", "abcAbc".toUpperCaseHead())
         assertEquals("AbcAbc", "AbcAbc".toUpperCaseHead())
         assertEquals("123Abc", "123Abc".toUpperCaseHead())
