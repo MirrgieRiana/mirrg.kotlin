@@ -2,6 +2,8 @@
 
 package mirrg.kotlin.hydrogen
 
+
+// 上限・下限
 infix fun Byte.atMost(other: Byte) = coerceAtMost(other)
 infix fun Byte.atLeast(other: Byte) = coerceAtLeast(other)
 infix fun Short.atMost(other: Short) = coerceAtMost(other)
