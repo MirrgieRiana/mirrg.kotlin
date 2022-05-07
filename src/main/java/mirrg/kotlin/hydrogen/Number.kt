@@ -18,3 +18,9 @@ infix fun Double.atMost(other: Double) = coerceAtMost(other)
 infix fun Double.atLeast(other: Double) = coerceAtLeast(other)
 infix fun <T : Comparable<T>> T.atMost(other: T) = coerceAtMost(other)
 infix fun <T : Comparable<T>> T.atLeast(other: T) = coerceAtLeast(other)
+
+
+// 中置比較
+infix fun <T : Comparable<T>> T.min(other: T) = if (this <= other) this else other
+infix fun <T : Comparable<T>> T.max(other: T) = if (this >= other) this else other
+infix fun <T : Comparable<T>> T.cmp(other: T) = compareTo(other)
