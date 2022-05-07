@@ -4,13 +4,12 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class NumberTest {
-    @Suppress("DEPRECATION")
     @Test
     fun minMaxTest() {
         assertEquals(10, 10 min 20)
         assertEquals(20, 10 max 20)
-        assertEquals(10.0, 10.0 min 20.0)
-        assertEquals(20.0, 10.0 max 20.0)
+        assertEquals(10.0 as Any, 10.0 min 20.0)
+        assertEquals(20.0 as Any, 10.0 max 20.0)
     }
 
     @Test
