@@ -49,7 +49,7 @@ class StringTest {
     }
 
     @Test
-    fun to_CamelCase() {
+    fun to_CamelCaseTest() {
         assertEquals("Abc123abcAbc-abcAbc", "abc_123abc_abc-abc_Abc".toUpperCamelCase())
         assertEquals("abc123abcAbc-abcAbc", "abc_123abc_abc-abc_Abc".toLowerCamelCase())
         assertEquals("Abc123abcAbc-abcAbc", "Abc_123abc_abc-abc_Abc".toUpperCamelCase())
