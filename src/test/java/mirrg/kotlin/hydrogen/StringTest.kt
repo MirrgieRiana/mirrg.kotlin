@@ -65,4 +65,21 @@ class StringTest {
         assertEquals("Abc.123abc.Abc-abc.Abc", "Abc_123abc_abc-abc_Abc".toUpperCamelCase("_", "."))
         assertEquals("Abc.123abc.Abc-abc.Abc", "Abc_123abc_abc-abc_Abc".toLowerCamelCase("_", "."))
     }
+
+    @Test
+    fun formatAs_Test() {
+        assertEquals("010", 10.toByte().formatAs("%03d"))
+        assertEquals("010", 10.toShort().formatAs("%03d"))
+        assertEquals("010", 10.formatAs("%03d"))
+        assertEquals("010", 10L.formatAs("%03d"))
+        assertEquals("010.000", 10.0F.formatAs("%07.3f"))
+        assertEquals("010.000", 10.0.formatAs("%07.3f"))
+
+        assertEquals("010", 10.toByte().formatBy("03"))
+        assertEquals("010", 10.toShort().formatBy("03"))
+        assertEquals("010", 10.formatBy("03"))
+        assertEquals("010", 10L.formatBy("03"))
+        assertEquals("010.000", 10.0F.formatBy("07.3"))
+        assertEquals("010.000", 10.0.formatBy("07.3"))
+    }
 }

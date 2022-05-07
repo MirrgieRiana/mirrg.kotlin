@@ -29,3 +29,20 @@ fun String.toUpperCamelCase(beforeDelimiter: String = "_", afterDelimiter: Strin
 
 /** @receiver スネークケースの文字列 */
 fun String.toLowerCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = split(beforeDelimiter).mapIndexed { i, it -> if (i == 0) it else it.toUpperCaseHead() }.join(afterDelimiter)
+
+
+// 中置format
+
+infix fun Byte.formatAs(format: String) = String.format(format, this)
+infix fun Short.formatAs(format: String) = String.format(format, this)
+infix fun Int.formatAs(format: String) = String.format(format, this)
+infix fun Long.formatAs(format: String) = String.format(format, this)
+infix fun Float.formatAs(format: String) = String.format(format, this)
+infix fun Double.formatAs(format: String) = String.format(format, this)
+
+infix fun Byte.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}d"
+infix fun Short.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}d"
+infix fun Int.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}d"
+infix fun Long.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}d"
+infix fun Float.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}f"
+infix fun Double.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}f"
