@@ -39,7 +39,23 @@ class LangTest {
 
     @Test
     fun orTest() {
+
+        // 型が異なるパターン
         assertEquals("10", (10 as Int?).or { 20.0 }.toInt().toString())
         assertEquals("20", (null as Int?).or { 20.0 }.toInt().toString())
+
+        // 右辺がNothingのパターン
+        assertEquals(10, run a@{
+            @Suppress("RedundantNullableReturnType")
+            val a: Int? = 10
+            val b: Int = a.or { return@a "20" }
+            b
+        })
+        assertEquals("20", run a@{
+            val a: Int? = null
+            val b: Int = a.or { return@a "20" }
+            fail()
+        })
+
     }
 }
