@@ -1,8 +1,9 @@
 package mirrg.kotlin.hydrogen
 
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.fail
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Test
+import java.io.Serializable
 
 class LangTest {
     private inline fun <reified T : Throwable> assertThrow(block: () -> Any) {
@@ -53,8 +54,25 @@ class LangTest {
         })
         assertEquals("20", run a@{
             val a: Int? = null
+
+            @Suppress("UNUSED_VARIABLE")
             val b: Int = a.or { return@a "20" }
             fail()
+        })
+
+        // 異なる型の型推論
+        assertEquals(1, run {
+            @Suppress("RedundantNullableReturnType")
+            val a: String? = "s"
+
+            val b: StringBuilder = StringBuilder().append("sb")
+
+            val c = a.or { b } // c : {CharSequence & java.io.Serializable}
+
+            @Suppress("UNUSED_VARIABLE")
+            val serializable: Serializable = c // キャスト不要
+
+            c.length // CharSequenceのメソッドが利用できる
         })
 
     }
