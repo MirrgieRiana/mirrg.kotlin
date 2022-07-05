@@ -6,6 +6,8 @@ import org.junit.Test
 class GsonTest {
     @Test
     fun conversion() {
+        assertEquals("", "  ".toJsonElement().toJson()) // blankはundefinedに、undefinedは空白に
+
         assertEquals("100", "100".toJsonElement().toJson()) // 整数が書ける
         assertEquals("100.123", "100.123".toJsonElement().toJson()) // 小数が書ける
         assertEquals("100.123000", "100.123000".toJsonElement().toJson()) // 小数の表記は維持される
@@ -27,6 +29,8 @@ class GsonTest {
 
     @Test
     fun jsonElement() {
+        assertEquals("", null.toJson()) // java nullをjsonにすると空白になる
+
         assertEquals("10", 10.jsonElement.toJson()) // Intをjsonにできる
         assertEquals("12.3456", 12.3456.jsonElement.toJson()) // Doubleをjsonにできる
         assertEquals("12.3456", 12.34560.jsonElement.toJson()) // Doubleリテラルは末尾の0を区別できない
