@@ -15,6 +15,38 @@ class StringTest {
     }
 
     @Test
+    fun indent() {
+        assertEquals(" ", "".indent(" ")) // 空文字の場合、先頭にインデントを付与
+        assertEquals(" A", "A".indent(" ")) // 不完全な行の場合、先頭にインデントを付与
+        assertEquals(" A\n A", "A\nA".indent(" ")) // 複数行の不完全な行の場合、各行にインデントを付与
+        assertEquals(" A\n ", "A\n".indent(" ")) // 完全な行の場合、改行の後にもインデントを付与
+        assertEquals(" \n ", "\n".indent(" ")) // 完全な行の本文が空でも同様
+        assertEquals(" \n A", "\nA".indent(" ")) // 完全な行の後に不完全な行の場合、各行にインデントを付与
+    }
+
+    @Test
+    fun escapeRegex() {
+
+        // 英数字はエスケープしない
+        assertEquals("0123456789", "0123456789".escapeRegex())
+        assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ".escapeRegex())
+        assertEquals("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz".escapeRegex())
+
+        // マルチバイト文字はエスケープしない
+        assertEquals("あ亜（）　㎡", "あ亜（）　㎡".escapeRegex())
+
+        // 半角空白・改行・タブはエスケープしない
+        assertEquals(" \r\n\t", " \r\n\t".escapeRegex())
+
+        // エスケープしない記号
+        assertEquals("""!"#%&',-/:;<=>@]_`}~""", """!"#%&',-/:;<=>@]_`}~""".escapeRegex())
+
+        // エスケープする記号
+        assertEquals("""\$\(\)\*\+\.\?\[\\\^\{\|""", """$()*+.?[\^{|""".escapeRegex())
+
+    }
+
+    @Test
     fun joinTest() {
         assertEquals("a, b, c", listOf("a", "b", "c").asIterable().join())
         assertEquals("a, b, c", listOf("a", "b", "c").toTypedArray().join())
