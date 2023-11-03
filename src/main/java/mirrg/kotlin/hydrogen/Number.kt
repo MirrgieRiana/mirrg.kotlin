@@ -57,9 +57,21 @@ fun Double.ceilToLong() = ceil(this).toLong()
 
 
 // floor div/mod
+
+@Deprecated("Moving", replaceWith = ReplaceWith("mirrg.kotlin.java.hydrogen.floorDiv(this, other)"))
 infix fun Int.floorDiv(other: Int) = Math.floorDiv(this, other)
+
+@Deprecated("Moving", replaceWith = ReplaceWith("mirrg.kotlin.java.hydrogen.floorDiv(this, other)"))
 infix fun Long.floorDiv(other: Int) = Math.floorDiv(this, other)
+
+@Deprecated("Moving", replaceWith = ReplaceWith("mirrg.kotlin.java.hydrogen.floorDiv(this, other)"))
 infix fun Long.floorDiv(other: Long) = Math.floorDiv(this, other)
+
+@Deprecated("Moving", replaceWith = ReplaceWith("mirrg.kotlin.java.hydrogen.floorMod(this, other)"))
 infix fun Int.floorMod(other: Int) = Math.floorMod(this, other)
+
+@Deprecated("Moving", replaceWith = ReplaceWith("mirrg.kotlin.java.hydrogen.floorMod(this, other)"))
 infix fun Long.floorMod(other: Int) = Math.floorMod(this, other)
+
+@Deprecated("Moving", replaceWith = ReplaceWith("mirrg.kotlin.java.hydrogen.floorMod(this, other)"))
 infix fun Long.floorMod(other: Long) = Math.floorMod(this, other)
