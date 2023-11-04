@@ -2,7 +2,7 @@ package mirrg.kotlin.java.hydrogen
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.*
+import java.util.Optional
 
 class OptionalTest {
     @Test

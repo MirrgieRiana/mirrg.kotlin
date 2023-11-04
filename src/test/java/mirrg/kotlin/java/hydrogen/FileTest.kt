@@ -1,5 +1,3 @@
 package mirrg.kotlin.java.hydrogen
 
-class FileTest {
-
-}
+class FileTest
