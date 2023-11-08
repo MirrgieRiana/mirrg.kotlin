@@ -18,6 +18,17 @@
 
 package mirrg.kotlin.java.hydrogen
 
+import java.time.Duration
 import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.temporal.Temporal
 
+// Conversion
 fun String.toInstant(): Instant = Instant.parse(this)
+operator fun LocalDate.plus(time: LocalTime): LocalDateTime = LocalDateTime.of(this, time)
+operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
+
+// Property
+val Duration.doubleSeconds get() = seconds.toDouble() + nano / 1_000_000_000.0
