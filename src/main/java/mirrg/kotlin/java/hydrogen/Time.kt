@@ -25,11 +25,20 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.temporal.Temporal
 
+
 // Conversion
+
 fun Instant(epochSecond: Long, nanoAdjustment: Long): Instant = Instant.ofEpochSecond(epochSecond, nanoAdjustment)
+fun Long.toInstantAsEpochSecond(): Instant = Instant.ofEpochSecond(this)
+fun Long.toInstantAsEpochSecond(nanoAdjustment: Long): Instant = Instant.ofEpochSecond(this, nanoAdjustment)
+fun Long.toInstantAsEpochMilli(): Instant = Instant.ofEpochMilli(this)
 fun String.toInstant(): Instant = Instant.parse(this)
+
 operator fun LocalDate.plus(time: LocalTime): LocalDateTime = LocalDateTime.of(this, time)
+
 operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
 
+
 // Property
+
 val Duration.doubleSeconds get() = seconds.toDouble() + nano / 1_000_000_000.0
