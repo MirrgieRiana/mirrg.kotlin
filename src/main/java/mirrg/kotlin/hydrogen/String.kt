@@ -26,6 +26,8 @@ fun String.indent(indent: String) = indent + this.replace("""\r\n|\n|\r""".toReg
 
 fun String.escapeRegex() = this.replace("""[.\[^$()*+?{|\\]""".toRegex()) { "\\" + it.groups[0]?.value!! }
 
+operator fun MatchResult.get(index: Int) = this.groups[index]?.value
+
 
 // toStringを呼び出さないjoin
 
