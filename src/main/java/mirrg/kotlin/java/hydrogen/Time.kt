@@ -23,6 +23,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.ZoneId
 import java.time.temporal.Temporal
 
 
@@ -34,7 +35,10 @@ fun Long.toInstantAsEpochSecond(nanoAdjustment: Long): Instant = Instant.ofEpoch
 fun Long.toInstantAsEpochMilli(): Instant = Instant.ofEpochMilli(this)
 fun String.toInstant(): Instant = Instant.parse(this)
 
+fun Instant.toLocalDate(zone: ZoneId): LocalDate = LocalDate.ofInstant(this, zone)
 operator fun LocalDate.plus(time: LocalTime): LocalDateTime = LocalDateTime.of(this, time)
+
+fun Instant.toLocalDateTime(zone: ZoneId): LocalDateTime = LocalDateTime.ofInstant(this, zone)
 
 operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
 
