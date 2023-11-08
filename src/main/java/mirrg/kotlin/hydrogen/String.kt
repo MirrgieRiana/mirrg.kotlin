@@ -70,3 +70,8 @@ infix fun Int.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecif
 infix fun Long.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}d"
 infix fun Float.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}f"
 infix fun Double.formatBy(formatSpecifier: String) = this formatAs "%${formatSpecifier}f"
+
+
+// Regex
+
+fun CharSequence.match(regex: Regex) = regex.matchEntire(this)
