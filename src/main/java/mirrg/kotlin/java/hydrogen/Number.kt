@@ -18,6 +18,9 @@
 
 package mirrg.kotlin.java.hydrogen
 
+import java.math.BigDecimal
+import java.math.BigInteger
+
 // floor div/mod
 infix fun Int.floorDiv(other: Int) = Math.floorDiv(this, other)
 infix fun Long.floorDiv(other: Int) = Math.floorDiv(this, other)
@@ -25,3 +28,9 @@ infix fun Long.floorDiv(other: Long) = Math.floorDiv(this, other)
 infix fun Int.floorMod(other: Int) = Math.floorMod(this, other)
 infix fun Long.floorMod(other: Int) = Math.floorMod(this, other)
 infix fun Long.floorMod(other: Long) = Math.floorMod(this, other)
+
+// BigDecimal, BigInteger
+infix fun BigDecimal.isSameAs(other: BigDecimal) = this.compareTo(other) == 0
+infix fun BigDecimal.isNotSameAs(other: BigDecimal) = this.compareTo(other) != 0
+infix fun BigInteger.isSameAs(other: BigInteger) = this == other
+infix fun BigInteger.isNotSameAs(other: BigInteger) = this != other
