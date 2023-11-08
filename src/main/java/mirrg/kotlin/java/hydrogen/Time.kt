@@ -26,6 +26,7 @@ import java.time.LocalTime
 import java.time.temporal.Temporal
 
 // Conversion
+fun Instant(epochSecond: Long, nanoAdjustment: Long): Instant = Instant.ofEpochSecond(epochSecond, nanoAdjustment)
 fun String.toInstant(): Instant = Instant.parse(this)
 operator fun LocalDate.plus(time: LocalTime): LocalDateTime = LocalDateTime.of(this, time)
 operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
