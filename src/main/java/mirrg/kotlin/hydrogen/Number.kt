@@ -22,6 +22,9 @@ import kotlin.math.ceil
 import kotlin.math.floor
 
 
+fun List<Double>.averageOrNull() = if (isEmpty()) null else this.average()
+
+
 // 上限・下限
 infix fun Byte.atMost(other: Byte) = coerceAtMost(other)
 infix fun Byte.atLeast(other: Byte) = coerceAtLeast(other)
