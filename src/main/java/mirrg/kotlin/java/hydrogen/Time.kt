@@ -24,21 +24,25 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.temporal.Temporal
 
 
 // Conversion
 
 fun Instant(epochSecond: Long, nanoAdjustment: Long): Instant = Instant.ofEpochSecond(epochSecond, nanoAdjustment)
+fun LocalDateTime.toInstantAsUtc(): Instant = this.toInstant(ZoneOffset.UTC)
 fun Long.toInstantAsEpochSecond(): Instant = Instant.ofEpochSecond(this)
 fun Long.toInstantAsEpochSecond(nanoAdjustment: Long): Instant = Instant.ofEpochSecond(this, nanoAdjustment)
 fun Long.toInstantAsEpochMilli(): Instant = Instant.ofEpochMilli(this)
 fun String.toInstant(): Instant = Instant.parse(this)
 
 fun Instant.toLocalDate(zone: ZoneId): LocalDate = LocalDate.ofInstant(this, zone)
+fun Instant.toUtcLocalDate(): LocalDate = this.toLocalDate(ZoneOffset.UTC)
 operator fun LocalDate.plus(time: LocalTime): LocalDateTime = LocalDateTime.of(this, time)
 
 fun Instant.toLocalDateTime(zone: ZoneId): LocalDateTime = LocalDateTime.ofInstant(this, zone)
+fun Instant.toUtcLocalDateTime(): LocalDateTime = this.toLocalDateTime(ZoneOffset.UTC)
 
 operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
 
