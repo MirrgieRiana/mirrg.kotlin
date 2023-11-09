@@ -27,9 +27,9 @@ import java.nio.charset.Charset
  * 指定された文字および `%` をパーセントエンコードします。
  * 半角スペースを自動的に `+` に置換しません。
  */
-inline fun String.encodePercent(charset: Charset = Charsets.UTF_8, shouldBeEncoded: (Char) -> Boolean): String {
+inline fun CharSequence.encodePercent(charset: Charset = Charsets.UTF_8, shouldBeEncoded: (Char) -> Boolean): String {
     val sb = StringBuilder()
-    this.toCharArray().forEach { char ->
+    this.forEach { char ->
         if (char == '%' || shouldBeEncoded(char)) {
             char.toString().toByteArray(charset).forEach { byte ->
                 sb.append(String.format("%%%02X", byte.toInt() and 0xFF))
@@ -47,7 +47,7 @@ private val pattern = """(%[0-9a-fA-F][0-9a-fA-F])+""".toRegex()
  * すべてのパーセントエンコードされたシーケンスをデコードします。
  * `+`は半角スペースに置換されません。
  */
-fun String.decodePercent(charset: Charset = Charsets.UTF_8): String {
+fun CharSequence.decodePercent(charset: Charset = Charsets.UTF_8): String {
     return pattern.replace(this) { matchResult ->
         val string = matchResult.value
         val length = string.length / 3
