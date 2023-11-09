@@ -23,6 +23,7 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.temporal.Temporal
@@ -45,6 +46,8 @@ fun Instant.toLocalDateTime(zone: ZoneId): LocalDateTime = LocalDateTime.ofInsta
 fun Instant.toUtcLocalDateTime(): LocalDateTime = this.toLocalDateTime(ZoneOffset.UTC)
 
 operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
+
+fun OffsetDateTime.toUtcLocalDateTime(): LocalDateTime = this.withOffsetSameInstant(ZoneOffset.UTC).toLocalDateTime()
 
 
 // Property
