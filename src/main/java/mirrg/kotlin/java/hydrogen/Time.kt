@@ -47,6 +47,7 @@ fun Instant.toUtcLocalDateTime(): LocalDateTime = this.toLocalDateTime(ZoneOffse
 
 operator fun Temporal.minus(other: Temporal): Duration = Duration.between(other, this)
 
+fun Instant.toUtcOffsetDateTime(): OffsetDateTime = this.atOffset(ZoneOffset.UTC)
 fun OffsetDateTime.toUtcLocalDateTime(): LocalDateTime = this.withOffsetSameInstant(ZoneOffset.UTC).toLocalDateTime()
 
 
