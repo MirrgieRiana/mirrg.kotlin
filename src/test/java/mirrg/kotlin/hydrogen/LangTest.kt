@@ -27,6 +27,12 @@ class LangTest {
     private fun unitTestMethod1() = unit { 10 }
 
     @Test
+    fun castOrTest() {
+        assertEquals(10, (10 as Any).castOr<Number> { 20 })
+        assertThrow<ClassCastException> { ("abc" as Any).castOr<Number> { 20 } }
+    }
+
+    @Test
     fun castOrThrowTest() {
         assertEquals(10, (10 as Any).castOrThrow<Number>())
         assertThrow<ClassCastException> { ("abc" as Any).castOrThrow<Number>() }
