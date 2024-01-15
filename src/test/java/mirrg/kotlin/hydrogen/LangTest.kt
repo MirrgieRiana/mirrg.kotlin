@@ -29,7 +29,7 @@ class LangTest {
     @Test
     fun castOrTest() {
         assertEquals(10, (10 as Any).castOr<Number> { 20 })
-        assertThrow<ClassCastException> { ("abc" as Any).castOr<Number> { 20 } }
+        assertEquals(20, ("abc" as Any).castOr<Number> { 20 })
     }
 
     @Test
