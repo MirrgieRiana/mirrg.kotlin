@@ -9,6 +9,13 @@ import java.math.BigInteger
 
 class NumberTest {
     @Test
+    fun stripTrailingZerosTest() {
+        assertEquals("100.1", "100.100".stripTrailingZeros()) // 末尾の余計な 0 を削除する
+        assertEquals("100", "100.00".stripTrailingZeros()) // . が余った場合、ついでに削除する
+        assertEquals("100", "100".stripTrailingZeros()) // 整数の末尾は削除しない
+    }
+
+    @Test
     fun minMaxTest() {
         assertEquals(10, 10 min 20)
         assertEquals(20, 10 max 20)
