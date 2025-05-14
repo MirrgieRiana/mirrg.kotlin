@@ -19,5 +19,7 @@
 package mirrg.kotlin.java.hydrogen
 
 import java.util.Optional
+import kotlin.jvm.optionals.getOrNull
 
-val <T : Any> Optional<T>.orNull: T? get() = orElse(null)
+val <T : Any> Optional<T>.orNull: T? get() = this.getOrNull()
+fun <T : Any> T?.toOptional(): Optional<T> = Optional.ofNullable(this)
