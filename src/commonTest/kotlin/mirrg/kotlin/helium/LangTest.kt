@@ -81,4 +81,26 @@ class LangTest {
         })
 
     }
+
+    @Test
+    fun evalTest() {
+
+        assertEquals(10, eval { 10 }) // 単純に囲うだけの関数
+
+        run {
+            val nullable: String? = "10"
+            nullable.run outer@{
+                assertEquals(10, run {
+                    this@outer!!
+                    //this.toInt() // runを使うとthisの参照先が分離するのでスマートキャストができなくなる
+                    this@outer.toInt()
+                })
+                assertEquals(10, eval {
+                    this@outer!!
+                    this.toInt() // evalは常にthisを作らないため、外側のthisが見える
+                })
+            }
+        }
+
+    }
 }
