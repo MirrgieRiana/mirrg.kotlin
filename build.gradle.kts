@@ -55,6 +55,13 @@ kotlin {
     }
 }
 
+tasks.withType<Jar>().configureEach {
+    from(rootProject.file("LICENSE")) {
+        into("META-INF")
+        rename { "LICENSE" }
+    }
+}
+
 publishing {
     repositories {
         maven {
