@@ -1,0 +1,87 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+concurrency:
+  group: maven-push
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: build
+
+      - name: タグとブランチの検証
+        id: verify
+        shell: bash
+        working-directory: build
+        run: |
+          set -euo pipefail
+
+          TAG_NAME="${GITHUB_REF_NAME}"
+          if ! echo "$TAG_NAME" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'
+          then
+            echo "Invalid tag: $TAG_NAME" >&2
+            exit 1
+          fi
+
+          git fetch --no-tags origin helium
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/helium"
+          then
+            echo "Invalid branch" >&2
+            exit 1
+          fi
+
+          echo "version=${TAG_NAME#v}" >> "$GITHUB_OUTPUT"
+          echo "hash=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_OUTPUT"
+
+      - name: Javaのセットアップ
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: リポジトリのチェックアウト（リリース用）
+        uses: actions/checkout@v4
+        with:
+          path: maven
+          ref: maven
+          fetch-depth: 0
+
+      - name: ビルド
+        env:
+          MAVEN_DIR: ${{ github.workspace }}/maven/maven
+          VERSION: ${{ steps.verify.outputs.version }}
+        working-directory: build
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon publish
+
+      - name: コミットおよびプッシュ
+        run: |
+          cd maven
+
+          if [ -z "$(git status --porcelain)" ]
+          then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git add -A
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'mirrg.kotlin.helium ${{ steps.verify.outputs.version }} from ${{ steps.verify.outputs.hash }}'
+          git push origin maven

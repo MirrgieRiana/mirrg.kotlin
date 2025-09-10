@@ -4,7 +4,8 @@ plugins {
 }
 
 group = "mirrg.kotlin"
-version = "1.0.0"
+val envVersion = System.getenv("VERSION") ?: ""
+if (envVersion.isNotBlank()) version = envVersion
 
 repositories {
     mavenCentral()
@@ -58,7 +59,8 @@ publishing {
     repositories {
         maven {
             name = "localFolder"
-            url = uri(layout.projectDirectory.dir("maven"))
+            val envMavenDir = System.getenv("MAVEN_DIR") ?: ""
+            url = if (envMavenDir.isNotBlank()) uri(file(envMavenDir)) else uri(layout.projectDirectory.dir("maven"))
         }
     }
 }
