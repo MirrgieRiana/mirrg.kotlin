@@ -43,6 +43,14 @@ inline fun <O> eval(block: () -> O): O {
     return block()
 }
 
+@Suppress("UnusedReceiverParameter")
+inline fun <O> Any?.eval(block: () -> O): O {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return block()
+}
+
 fun Boolean.toUnitOrNull() = if (this) Unit else null
 
 data class Slot<T>(var value: T) {

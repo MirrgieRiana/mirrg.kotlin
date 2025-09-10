@@ -3,6 +3,8 @@ package mirrg.kotlin.helium
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
+import kotlin.time.DurationUnit
+import kotlin.time.measureTime
 
 class LangTest {
     private inline fun <reified T : Throwable> assertThrow(block: () -> Any) {
@@ -85,17 +87,81 @@ class LangTest {
     @Test
     fun evalTest() {
 
-        assertEquals(10, eval { 10 }) // 単純に囲うだけの関数
-
+        // 最後の戻り値を返す
         run {
-            val nullable: String? = "10"
+
+            class Wrapper<T>(val value: T) // 任意の型を受け取る型引数を持っているかのテスト用
+
+            fun createWrapper(): Wrapper<Int>? = Wrapper(10) // Any?を受理し、かつreifiedでない場合にのみ渡すことができる
+            fun <T> getValue(wrapper: Wrapper<T>?) = wrapper!!.value // 渡した型が戻り値にも表れることのテスト
+
+            // レシーバー無し版
+            assertEquals(10, getValue(mirrg.kotlin.helium.eval { createWrapper() }))
+
+            // レシーバーあり版
+            assertEquals(10, getValue("receiver".eval { createWrapper() }))
+
+            // thisのある環境ではレシーバーのあり無し版が同時に成立するが、無修飾で呼び出すことができる
+            assertEquals(10, getValue("receiver".run { eval { createWrapper() } }))
+
+        }
+
+        // 副作用を1回だけ起こす
+        assertEquals(10, run {
+            var i = 0
+            mirrg.kotlin.helium.eval { i += 10 }
+            i
+        })
+        assertEquals(10, run {
+            var i = 0
+            "receiver".eval { i += 10 }
+            i
+        })
+
+        // ブロック内が1度だけ実行されることが保証されている
+        run {
+            val a: Int
+            mirrg.kotlin.helium.eval {
+                a = 10
+            }
+            assertEquals(10, a)
+        }
+        run {
+            val a: Int
+            "receiver".eval {
+                a = 10
+            }
+            assertEquals(10, a)
+        }
+
+        // itを新たに作らない
+        assertEquals(10, "10".let { mirrg.kotlin.helium.eval { it.toInt() } })
+        assertEquals(10, "10".let { "receiver".eval { it.toInt() } })
+
+        // thisを新たに作らない
+        run {
+            val nullable: String? = "10".takeIf { measureTime {}.toDouble(DurationUnit.DAYS) < 1_000_000.0 } // 最適化防止
             nullable.run outer@{
                 assertEquals(10, run {
                     this@outer!!
                     //this.toInt() // runを使うとthisの参照先が分離するのでスマートキャストができなくなる
                     this@outer.toInt()
                 })
-                assertEquals(10, eval {
+            }
+        }
+        run {
+            val nullable: String? = "10".takeIf { measureTime {}.toDouble(DurationUnit.DAYS) < 1_000_000.0 } // 最適化防止
+            nullable.run outer@{
+                assertEquals(10, mirrg.kotlin.helium.eval {
+                    this@outer!!
+                    this.toInt() // evalは常にthisを作らないため、外側のthisが見える
+                })
+            }
+        }
+        run {
+            val nullable: String? = "10".takeIf { measureTime {}.toDouble(DurationUnit.DAYS) < 1_000_000.0 } // 最適化防止
+            nullable.run outer@{
+                assertEquals(10, "receiver".eval {
                     this@outer!!
                     this.toInt() // evalは常にthisを作らないため、外側のthisが見える
                 })
