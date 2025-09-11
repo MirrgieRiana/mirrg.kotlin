@@ -36,5 +36,6 @@ The Kotlin compiler version each library release is built with.
 
 | Library | Kotlin |
 |---------|--------|
+| 1.0.0   | 1.9.25 |
 | 1.1.0   | 1.9.25 |
 | 2.0.0   | 2.0.21 |
