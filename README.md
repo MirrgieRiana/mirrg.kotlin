@@ -29,3 +29,11 @@ dependencies {
     implementation("mirrg.kotlin:mirrg.kotlin.helium:<version>")
 }
 ```
+
+## Kotlin Version Compatibility
+
+The Kotlin compiler version each library release is built with.
+
+| Library | Kotlin |
+|---------|--------|
+| 1.1.0   | 1.9.25 |
