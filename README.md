@@ -39,3 +39,4 @@ The Kotlin compiler version each library release is built with.
 | 1.0.0   | 1.9.25 |
 | 1.1.0   | 1.9.25 |
 | 2.0.0   | 2.0.21 |
+| 3.0.0   | 2.1.21 |
