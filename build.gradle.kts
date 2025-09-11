@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.9.25"
+    kotlin("multiplatform") version "2.0.21"
     `maven-publish`
 }
 
@@ -13,7 +13,7 @@ repositories {
 
 kotlin {
     jvm()
-    js(IR) {
+    js {
         browser()
         nodejs()
     }
