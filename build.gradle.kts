@@ -58,6 +58,10 @@ project(":kotlin-2-1") {
                 }
             }
         }
+        sourceSets.configureEach {
+            kotlin.setSrcDirs(listOf(project.layout.projectDirectory.dir("generated/$name/kotlin").asFile))
+            resources.setSrcDirs(listOf(project.layout.projectDirectory.dir("generated/$name/resources").asFile))
+        }
     }
 
     tasks.withType<Jar>().configureEach {
