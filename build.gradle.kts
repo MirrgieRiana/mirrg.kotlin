@@ -1,98 +1,46 @@
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
-    kotlin("multiplatform") version "2.1.21" apply false
+    java
 }
 
-project(":kotlin-2-1") {
-    apply(plugin = "org.jetbrains.kotlin.multiplatform")
-    apply(plugin = "maven-publish")
+val taskEntries = listOf(
+    "build" to "build",
+    "verification" to "check",
+    "publishing" to "publish",
+)
 
-    group = "mirrg.kotlin"
-    val envVersion = System.getenv("VERSION") ?: ""
-    if (envVersion.isNotBlank()) version = envVersion
+val subDistributions = listOf(
+    "kotlin-2-1" to "kotlin21",
+)
 
-    repositories {
-        mavenCentral()
+sourceSets {
+    register("commonMain") {
+        resources.srcDir("src/commonMain/template")
     }
-
-    extensions.configure<KotlinMultiplatformExtension> {
-        jvm()
-        js {
-            browser()
-            nodejs()
-        }
-        linuxX64()
-        linuxArm64()
-        mingwX64()
-        //macosX64()
-        //macosArm64()
-        //androidNativeArm32()
-        //androidNativeArm64()
-        //androidNativeX86()
-        //androidNativeX64()
-        //iosX64()
-        //iosArm64()
-        //iosSimulatorArm64()
-        //tvosX64()
-        //tvosArm64()
-        //tvosSimulatorArm64()
-        //watchosX64()
-        //watchosArm64()
-        //watchosSimulatorArm64()
-        //watchosArm32()
-        //@OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
-        //wasmJs {
-        //    browser()
-        //    nodejs()
-        //    d8()
-        //}
-        //@OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
-        //wasmWasi()
-
-        fun KotlinSourceSet.setGeneration() {
-            val sourceSetName = name
-            val generateTask = project.tasks.create<Sync>("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
-                group = "build"
-                into(project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin"))
-                from(rootProject.layout.projectDirectory.dir("src/$sourceSetName/template")) {
-                    include("**/*.txt")
-                    rename { it.removeSuffix(".txt") }
-                }
-            }
-            kotlin.setSrcDirs(listOf(generateTask))
-        }
-
-        sourceSets {
-            val commonMain by getting {
-                setGeneration()
-            }
-            val commonTest by getting {
-                dependencies {
-                    implementation(kotlin("test"))
-                }
-                setGeneration()
-            }
-        }
+    register("commonTest") {
+        resources.srcDir("src/commonTest/template")
     }
+}
 
-    tasks.withType<Jar>().configureEach {
-        from(rootProject.file("LICENSE")) {
-            into("META-INF")
-            rename { "LICENSE" }
+tasks.register("publish") {
+    group = "publishing"
+}
+
+fun subDistribution(dirName: String, name: String) {
+    fun bridgeTask(group: String, taskName: String) {
+        val checkTask by tasks.register<GradleBuild>("$taskName${name.uppercaseFirstChar()}") {
+            this.group = group
+            this.dir = file(dirName)
+            this.tasks = listOf(":$taskName")
         }
+        tasks.named(taskName).configure { dependsOn(checkTask) }
     }
-
-    extensions.configure<PublishingExtension> {
-        repositories {
-            maven {
-                name = "localFolder"
-                val envMavenDir = System.getenv("MAVEN_DIR") ?: ""
-                url = if (envMavenDir.isNotBlank()) uri(file(envMavenDir)) else uri(rootProject.layout.projectDirectory.dir("maven"))
-            }
-        }
+    taskEntries.forEach {
+        bridgeTask(it.first, it.second)
     }
+}
 
+subDistributions.forEach {
+    subDistribution(it.first, it.second)
 }
