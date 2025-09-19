@@ -1,4 +1,6 @@
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 plugins {
     kotlin("multiplatform") version "2.1.21" apply false
@@ -50,17 +52,29 @@ project(":kotlin-2-1") {
         //@OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
         //wasmWasi()
 
+        fun KotlinSourceSet.setGeneration() {
+            val sourceSetName = name
+            val generateTask = project.tasks.create<Sync>("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
+                group = "build"
+                into(project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin"))
+                from(rootProject.layout.projectDirectory.dir("src/$sourceSetName/template")) {
+                    include("**/*.txt")
+                    rename { it.removeSuffix(".txt") }
+                }
+            }
+            kotlin.setSrcDirs(listOf(generateTask))
+        }
+
         sourceSets {
-            val commonMain by getting
+            val commonMain by getting {
+                setGeneration()
+            }
             val commonTest by getting {
                 dependencies {
                     implementation(kotlin("test"))
                 }
+                setGeneration()
             }
-        }
-        sourceSets.configureEach {
-            kotlin.setSrcDirs(listOf(project.layout.projectDirectory.dir("generated/$name/kotlin").asFile))
-            resources.setSrcDirs(listOf(project.layout.projectDirectory.dir("generated/$name/resources").asFile))
         }
     }
 
