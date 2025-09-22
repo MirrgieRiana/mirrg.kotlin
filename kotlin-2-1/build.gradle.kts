@@ -55,7 +55,7 @@ kotlin {
         val generateTask = project.tasks.register<Sync>("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
             group = "build"
             into(project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin"))
-            from(outerProjectDirectory.dir("src/$sourceSetName/template")) {
+            from(outerProjectDirectory.dir("template/src/$sourceSetName/template")) {
                 include("**/*.txt")
                 rename { it.removeSuffix(".txt") }
             }

@@ -4,10 +4,10 @@ plugins {
 
 sourceSets {
     register("commonMain") {
-        resources.srcDir("src/commonMain/template")
+        resources.srcDir("template/src/commonMain/template")
     }
     register("commonTest") {
-        resources.srcDir("src/commonTest/template")
+        resources.srcDir("template/src/commonTest/template")
     }
 }
 
