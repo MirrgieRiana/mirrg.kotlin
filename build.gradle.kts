@@ -19,6 +19,10 @@ tasks.register("publish") {
 }
 
 
+tasks.register("generateBuildScripts") {
+    group = "generation"
+}
+
 fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
     val includedBuild = if (gradle.includedBuilds.any { it.name == distributionSuffix }) gradle.includedBuild(distributionSuffix) else null
 
@@ -32,7 +36,7 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
         configureTask("publish")
     }
 
-    tasks.register("generate${distributionSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
+    val task = tasks.register("generate${distributionSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
         group = "generation"
         doLast {
             val inputDir = project.layout.projectDirectory.dir("template")
@@ -55,6 +59,7 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
             }
         }
     }
+    tasks.named("generateBuildScripts").configure { dependsOn(task) }
 
 }
 configureSubBuild("kotlin-2-1", "2.1.21")
