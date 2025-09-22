@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 plugins {
     kotlin("multiplatform") version "2.1.21"
     `maven-publish`
+    id("build-logic")
 }
 
 group = "mirrg.kotlin"
@@ -55,11 +56,12 @@ kotlin {
     fun KotlinSourceSet.setGeneration() {
         val sourceSetName = name
         val generateTask = project.tasks.register<Sync>("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
-            group = "build"
+            group = "generation"
             into(project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin"))
             from(outerProjectDirectory.dir("template/src/$sourceSetName/template")) {
                 include("**/*.txt")
                 rename { it.removeSuffix(".txt") }
+                filter { Template.evaluate(it, Template.Arguments("2.1.21")) }
             }
         }
         kotlin.setSrcDirs(listOf(generateTask))
