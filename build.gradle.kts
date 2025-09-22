@@ -24,7 +24,7 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
 
     if (includedBuild != null) {
         fun configureTask(taskName: String) {
-            tasks.named(taskName) { dependsOn(includedBuild.task(":$taskName")) }
+            tasks.named(taskName).configure { dependsOn(includedBuild.task(":$taskName")) }
         }
         configureTask("clean")
         configureTask("build")
