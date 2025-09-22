@@ -55,6 +55,7 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
                     ),
                 )
                 val output = Template.evaluate(input, arguments)
+                outputFile.parentFile.mkdirs()
                 outputFile.writeText(output)
             }
         }
