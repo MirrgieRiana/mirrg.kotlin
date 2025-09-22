@@ -1,0 +1,18 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+#if [2.1.0,2.2.0)
+rootProject.name = "mirrg.kotlin.helium-kotlin-2-1"
+#else
+#error
+#endif
