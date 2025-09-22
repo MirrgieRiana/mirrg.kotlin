@@ -11,4 +11,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "mirrg.kotlin.helium.kotlin-2-1"
+rootProject.name = "mirrg.kotlin.helium-kotlin-2-1"
