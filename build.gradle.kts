@@ -20,6 +20,7 @@ fun configureSubBuild(subBuildName: String) {
     fun configureTask(taskName: String) {
         tasks.named(taskName) { dependsOn(gradle.includedBuild(subBuildName).task(":$taskName")) }
     }
+    configureTask("clean")
     configureTask("build")
     configureTask("check")
     configureTask("publish")
