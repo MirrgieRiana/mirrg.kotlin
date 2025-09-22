@@ -1,5 +1,6 @@
 plugins {
     java
+    id("build-logic")
 }
 
 sourceSets {
