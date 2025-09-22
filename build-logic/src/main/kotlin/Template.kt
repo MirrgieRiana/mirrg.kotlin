@@ -3,7 +3,7 @@ import org.eclipse.aether.version.VersionScheme
 
 object Template {
 
-    class Arguments(val versionString: String)
+    class Arguments(val versionString: String, val parameters: Map<String, String>)
 
     abstract class Node {
         abstract fun evaluate(arguments: Arguments): List<String>
@@ -11,7 +11,14 @@ object Template {
 
 
     private class LinesLiteralNode(val lines: List<String>) : Node() {
-        override fun evaluate(arguments: Arguments) = lines
+        override fun evaluate(arguments: Arguments): List<String> {
+            return lines.map {
+                it.replace("""<%=\s*([a-zA-Z0-9_]+)\s*%>""".toRegex()) { matchResult ->
+                    val (parameterName) = matchResult.destructured
+                    arguments.parameters[parameterName] ?: throw RuntimeException("Unknown parameter: $parameterName")
+                }
+            }
+        }
     }
 
     private fun parseLinesLiteral(input: MutableList<String>): Node {

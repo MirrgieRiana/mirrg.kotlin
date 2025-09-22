@@ -61,7 +61,7 @@ kotlin {
             from(outerProjectDirectory.dir("template/src/$sourceSetName/template")) {
                 include("**/*.txt")
                 rename { it.removeSuffix(".txt") }
-                filter { Template.evaluate(it, Template.Arguments("2.1.21")) }
+                filter { Template.evaluate(it, Template.Arguments("2.1.21", mapOf())) }
             }
         }
         kotlin.setSrcDirs(listOf(generateTask))
