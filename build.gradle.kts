@@ -31,6 +31,7 @@ fun configureVariant(
     variantSuffix: String,
     kotlinVersion: String,
     jvmTarget: String,
+    gradleVersion: String,
 ) {
     val includedBuild = if (gradle.includedBuilds.any { it.name == variantSuffix }) gradle.includedBuild(variantSuffix) else null
 
@@ -46,7 +47,7 @@ fun configureVariant(
         configureTask("publish")
     }
 
-    val task = tasks.register("generate${variantSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
+    val generateBuildScriptsTask = tasks.register("generate${variantSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
         group = "generation"
         doLast {
             val inputDir = project.layout.projectDirectory.dir("template")
@@ -71,12 +72,21 @@ fun configureVariant(
             }
         }
     }
-    tasks.named("generateBuildScripts").configure { dependsOn(task) }
+    tasks.named("generateBuildScripts").configure { dependsOn(generateBuildScriptsTask) }
+
+    val generateWrapperTask = tasks.register<Wrapper>("generate${variantSuffix.uppercaseFirstChar().replace("-", "")}Wrapper") {
+        val outputDir = project.layout.projectDirectory.dir(variantSuffix)
+        scriptFile = outputDir.file("gradlew").asFile
+        jarFile = outputDir.file("gradle/wrapper/gradle-wrapper.jar").asFile
+        this.gradleVersion = gradleVersion
+        distributionType = Wrapper.DistributionType.BIN
+    }
+    tasks.named("generateBuildScripts").configure { dependsOn(generateWrapperTask) }
 
 }
-configureVariant("kotlin-1-7", "1.7.21", "17")
-configureVariant("kotlin-1-8", "1.8.22", "17")
-configureVariant("kotlin-1-9", "1.9.25", "21")
-configureVariant("kotlin-2-0", "2.0.21", "21")
-configureVariant("kotlin-2-1", "2.1.21", "21")
-configureVariant("kotlin-2-2", "2.2.20", "21")
+configureVariant("kotlin-1-7", "1.7.21", "17", "8.14.3")
+configureVariant("kotlin-1-8", "1.8.22", "17", "8.14.3")
+configureVariant("kotlin-1-9", "1.9.25", "21", "8.14.3")
+configureVariant("kotlin-2-0", "2.0.21", "21", "8.14.3")
+configureVariant("kotlin-2-1", "2.1.21", "21", "8.14.3")
+configureVariant("kotlin-2-2", "2.2.20", "21", "8.14.3")
