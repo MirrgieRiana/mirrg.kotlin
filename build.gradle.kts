@@ -74,4 +74,9 @@ fun configureSubBuild(
     tasks.named("generateBuildScripts").configure { dependsOn(task) }
 
 }
+configureSubBuild("kotlin-1-7", "1.7.21", "17")
+configureSubBuild("kotlin-1-8", "1.8.22", "17")
+configureSubBuild("kotlin-1-9", "1.9.25", "21")
+configureSubBuild("kotlin-2-0", "2.0.21", "21")
 configureSubBuild("kotlin-2-1", "2.1.21", "21")
+configureSubBuild("kotlin-2-2", "2.2.20", "21")
