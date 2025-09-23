@@ -11,5 +11,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain { // (int)バージョンは1.6バリアントでは利用できない
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
