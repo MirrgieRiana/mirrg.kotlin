@@ -1,3 +1,10 @@
-*       text eol=lf
-*.bat   text eol=crlf
-*.jar  -text
+*               -text
+*.bat            text eol=crlf
+*.gitattributes  text eol=lf
+*.gitignore      text eol=lf
+*.kt             text eol=lf
+*.kts            text eol=lf
+*.md             text eol=lf
+*.properties     text eol=lf
+*.txt            text eol=lf
+*.yml            text eol=lf
