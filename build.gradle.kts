@@ -32,6 +32,7 @@ fun configureVariant(
     kotlinVersion: String,
     jvmTarget: String,
     gradleVersion: String,
+    gradleJavaVersion: Int,
 ) {
     val variantSlug = variantSuffix.replace("-", "").uppercaseFirstChar()
     val variantDir = project.layout.projectDirectory.dir(variantSuffix)
@@ -104,10 +105,30 @@ fun configureVariant(
     }
     generateVariantWorkspaceTask.configure { dependsOn(generateVariantWrapperTask) }
 
+    val generateVariantGradlePropertiesTask = tasks.register("generate${variantSlug}GradleProperties") {
+        group = "generation"
+        val outputFile = variantDir.file("gradle.properties").asFile
+        outputs.file(outputFile)
+        doLast {
+            logger.lifecycle("Generating {}", outputFile)
+            val properties = mapOf(
+                "org.gradle.java.home" to javaToolchains.launcherFor {
+                    languageVersion = JavaLanguageVersion.of(gradleJavaVersion)
+                }.get().metadata.installationPath.asFile.absolutePath,
+            )
+            val string = properties
+                .map { "${it.key}=${it.value.replace("\\", "\\\\")}" }
+                .joinToString("") { "$it\n" }
+            outputFile.parentFile.mkdirs()
+            outputFile.writeText(string)
+        }
+    }
+    generateVariantWorkspaceTask.configure { dependsOn(generateVariantGradlePropertiesTask) }
+
 }
-configureVariant("kotlin-1-7", "1.7.21", "17", "8.14.3")
-configureVariant("kotlin-1-8", "1.8.22", "17", "8.14.3")
-configureVariant("kotlin-1-9", "1.9.25", "21", "8.14.3")
-configureVariant("kotlin-2-0", "2.0.21", "21", "8.14.3")
-configureVariant("kotlin-2-1", "2.1.21", "21", "8.14.3")
-configureVariant("kotlin-2-2", "2.2.20", "21", "8.14.3")
+configureVariant("kotlin-1-7", "1.7.21", "17", "8.14.3", 21)
+configureVariant("kotlin-1-8", "1.8.22", "17", "8.14.3", 21)
+configureVariant("kotlin-1-9", "1.9.25", "21", "8.14.3", 21)
+configureVariant("kotlin-2-0", "2.0.21", "21", "8.14.3", 21)
+configureVariant("kotlin-2-1", "2.1.21", "21", "8.14.3", 21)
+configureVariant("kotlin-2-2", "2.2.20", "21", "8.14.3", 21)
