@@ -40,8 +40,8 @@ fun configureSubBuild(
         }
         configureTask("generate")
         configureTask("clean")
-        configureTask("build")
         configureTask("check")
+        configureTask("build")
         configureTask("publish")
     }
 
