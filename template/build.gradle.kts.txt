@@ -24,7 +24,11 @@ tasks.register("generate") {
 
 kotlin {
     jvm()
+#if [1.9.0,]
     js {
+#else
+    js(IR) {
+#endif
         browser()
         nodejs()
     }
