@@ -124,9 +124,17 @@ kotlin {
             setGeneration()
         }
     }
+#if [,1.7.0)
+
+    targets.withType<org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget>().configureEach {
+        compilations.all {
+            kotlinOptions.jvmTarget = "<%= jvmTarget %>"
+        }
+    }
+#endif
 }
 
-#if [,2.0.0)
+#if [1.7.0,2.0.0)
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "<%= jvmTarget %>"
