@@ -4,3 +4,4 @@ build
 .kotlin
 kotlin-js-store
 java_pid*.hprof
+/kotlin-*-*/gradle.properties
