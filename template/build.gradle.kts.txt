@@ -73,13 +73,37 @@ kotlin {
 
     fun org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet.setGeneration() {
         val sourceSetName = name
-        val generateTask = project.tasks.register<Sync>("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
+        val generateTask = project.tasks.register("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
             group = "generation"
-            into(project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin"))
-            from(outerProjectDirectory.dir("template/src/$sourceSetName/template")) {
-                include("**/*.txt")
-                rename { it.removeSuffix(".txt") }
-                filter { Template.evaluate(it, Template.Arguments("<%= kotlinVersion %>", mapOf())) }
+
+            val inputDir = outerProjectDirectory.dir("template/src/$sourceSetName/template")
+            val outputDir = project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin")
+
+            val inputFiles = project.fileTree(inputDir).filter { it.isFile && it.name.endsWith(".txt") }
+            inputs.files(inputFiles)
+            outputs.dir(outputDir)
+
+            doLast {
+                val oldOutputFiles: MutableList<File> = project.fileTree(outputDir).filter { it.isFile }.toMutableList()
+                inputFiles.forEach { inputFile ->
+                    val outputFile = outputDir.file(inputFile.relativeTo(inputDir.asFile).path.removeSuffix(".txt")).asFile
+
+                    println("Generating $outputFile")
+                    val input = inputFile.readText()
+                    val arguments = Template.Arguments(
+                        versionString = "2.1.21",
+                        parameters = mapOf(),
+                    )
+                    val output = Template.evaluate(input, arguments)
+                    outputFile.parentFile.mkdirs()
+                    outputFile.writeText(output)
+
+                    oldOutputFiles.remove(outputFile)
+                }
+                oldOutputFiles.forEach {
+                    println("Deleting $it")
+                    it.delete()
+                }
             }
         }
         project.tasks.named("generate").configure { dependsOn(generateTask) }
