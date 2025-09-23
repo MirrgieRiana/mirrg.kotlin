@@ -68,7 +68,13 @@ jobs:
         working-directory: build
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon publish
+          ./gradlew --no-daemon execPublishKotlin16
+          ./gradlew --no-daemon execPublishKotlin17
+          ./gradlew --no-daemon execPublishKotlin18
+          ./gradlew --no-daemon execPublishKotlin19
+          ./gradlew --no-daemon execPublishKotlin20
+          ./gradlew --no-daemon execPublishKotlin21
+          ./gradlew --no-daemon execPublishKotlin22
 
       - name: コミットおよびプッシュ
         run: |
