@@ -68,14 +68,14 @@ kotlin {
             val inputDir = outerProjectDirectory.dir("template/src/$sourceSetName/template")
             val outputDir = project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin")
 
-            val inputFiles = project.fileTree(inputDir).filter { it.isFile && it.name.endsWith(".txt") }
+            val inputFiles = project.fileTree(inputDir) { include("**/*.txt") }
             inputs.files(inputFiles)
             outputs.dir(outputDir)
 
             doLast {
                 val oldOutputFiles: MutableList<File> = project.fileTree(outputDir).filter { it.isFile }.toMutableList()
                 inputFiles.forEach { inputFile ->
-                    val outputFile = outputDir.file(inputFile.relativeTo(inputDir.asFile).path.removeSuffix(".txt")).asFile
+                    val outputFile = outputDir.file(inputFile.relativeTo(inputDir.asFile).invariantSeparatorsPath.removeSuffix(".txt")).asFile
 
                     println("Generating $outputFile")
                     val input = inputFile.readText()
