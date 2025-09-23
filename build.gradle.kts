@@ -126,6 +126,7 @@ fun configureVariant(
     generateVariantWorkspaceTask.configure { dependsOn(generateVariantGradlePropertiesTask) }
 
 }
+configureVariant("kotlin-1-6", "1.6.21", "17", "7.6.6", 17)
 configureVariant("kotlin-1-7", "1.7.21", "17", "8.14.3", 21)
 configureVariant("kotlin-1-8", "1.8.22", "17", "8.14.3", 21)
 configureVariant("kotlin-1-9", "1.9.25", "21", "8.14.3", 21)
