@@ -23,7 +23,7 @@ tasks.register("publish") {
 }
 
 
-tasks.register("generateBuildScripts") {
+val generateWorkspacesTask = tasks.register("generateWorkspaces") {
     group = "generation"
 }
 
@@ -33,30 +33,51 @@ fun configureVariant(
     jvmTarget: String,
     gradleVersion: String,
 ) {
-    val includedBuild = if (gradle.includedBuilds.any { it.name == variantSuffix }) gradle.includedBuild(variantSuffix) else null
+    val variantSlug = variantSuffix.replace("-", "").uppercaseFirstChar()
+    val variantDir = project.layout.projectDirectory.dir(variantSuffix)
 
-    if (includedBuild != null) {
-        fun configureTask(taskName: String) {
-            tasks.named(taskName).configure { dependsOn(includedBuild.task(":$taskName")) }
+    val generateVariantWorkspaceTask = tasks.register("generate${variantSlug}Workspace") {
+        group = "generation"
+    }
+    generateWorkspacesTask.configure { dependsOn(generateVariantWorkspaceTask) }
+
+    // Variantプロジェクトのタスクのブリッジ
+    run {
+        fun configureTask(group: String, taskName: String) {
+            val execTask = tasks.register<Exec>("exec${taskName.uppercaseFirstChar()}${variantSlug}") {
+                this.group = group
+                workingDir = variantDir.asFile
+                val isWindows = System.getProperty("os.name").contains("windows", ignoreCase = true)
+                if (isWindows) {
+                    commandLine("cmd", "/c", variantDir.file("gradlew.bat").asFile.absolutePath, taskName)
+                } else {
+                    doFirst {
+                        variantDir.file("gradlew").asFile.setExecutable(true)
+                    }
+                    commandLine(variantDir.file("gradlew").asFile.absolutePath, taskName)
+                }
+                dependsOn(generateVariantWorkspaceTask)
+            }
+            tasks.named(taskName).configure { dependsOn(execTask) }
         }
-        configureTask("generate")
-        configureTask("clean")
-        configureTask("assemble")
-        configureTask("check")
-        configureTask("build")
-        configureTask("publish")
+        configureTask("generation", "generate")
+        configureTask("build", "clean")
+        configureTask("build", "assemble")
+        configureTask("verification", "check")
+        configureTask("build", "build")
+        configureTask("publishing", "publish")
     }
 
-    val generateBuildScriptsTask = tasks.register("generate${variantSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
+    val generateVariantBuildScriptsTask = tasks.register("generate${variantSlug}BuildScripts") {
         group = "generation"
+        val templateDir = project.layout.projectDirectory.dir("template")
+        val inputFiles = project.fileTree(templateDir) { include("*.kts.txt") }
+        inputs.files(inputFiles)
+        outputs.dir(variantDir)
         doLast {
-            val inputDir = project.layout.projectDirectory.dir("template")
-            val outputDir = project.layout.projectDirectory.dir(variantSuffix)
-
-            val files = inputDir.asFile.listFiles().filter { it.isFile && it.name.endsWith(".kts.txt") }
-            files.forEach { inputFile ->
-                val outputFile = outputDir.file(inputFile.name.removeSuffix(".txt")).asFile
-                println("Generating $outputFile")
+            inputFiles.files.forEach { inputFile ->
+                val outputFile = variantDir.file(inputFile.name.removeSuffix(".txt")).asFile
+                logger.lifecycle("Generating {}", outputFile)
                 val input = inputFile.readText()
                 val arguments = Template.Arguments(
                     versionString = kotlinVersion,
@@ -72,16 +93,16 @@ fun configureVariant(
             }
         }
     }
-    tasks.named("generateBuildScripts").configure { dependsOn(generateBuildScriptsTask) }
+    generateVariantWorkspaceTask.configure { dependsOn(generateVariantBuildScriptsTask) }
 
-    val generateWrapperTask = tasks.register<Wrapper>("generate${variantSuffix.uppercaseFirstChar().replace("-", "")}Wrapper") {
-        val outputDir = project.layout.projectDirectory.dir(variantSuffix)
-        scriptFile = outputDir.file("gradlew").asFile
-        jarFile = outputDir.file("gradle/wrapper/gradle-wrapper.jar").asFile
+    val generateVariantWrapperTask = tasks.register<Wrapper>("generate${variantSlug}Wrapper") {
+        group = "generation"
+        scriptFile = variantDir.file("gradlew").asFile
+        jarFile = variantDir.file("gradle/wrapper/gradle-wrapper.jar").asFile
         this.gradleVersion = gradleVersion
         distributionType = Wrapper.DistributionType.BIN
     }
-    tasks.named("generateBuildScripts").configure { dependsOn(generateWrapperTask) }
+    generateVariantWorkspaceTask.configure { dependsOn(generateVariantWrapperTask) }
 
 }
 configureVariant("kotlin-1-7", "1.7.21", "17", "8.14.3")
