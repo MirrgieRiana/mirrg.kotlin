@@ -27,7 +27,11 @@ tasks.register("generateBuildScripts") {
     group = "generation"
 }
 
-fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
+fun configureSubBuild(
+    distributionSuffix: String,
+    kotlinVersion: String,
+    jvmTarget: String,
+) {
     val includedBuild = if (gradle.includedBuilds.any { it.name == distributionSuffix }) gradle.includedBuild(distributionSuffix) else null
 
     if (includedBuild != null) {
@@ -57,6 +61,7 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
                     parameters = mapOf(
                         "distributionSuffix" to distributionSuffix,
                         "kotlinVersion" to kotlinVersion,
+                        "jvmTarget" to jvmTarget,
                     ),
                 )
                 val output = Template.evaluate(input, arguments)
@@ -68,4 +73,4 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
     tasks.named("generateBuildScripts").configure { dependsOn(task) }
 
 }
-configureSubBuild("kotlin-2-1", "2.1.21")
+configureSubBuild("kotlin-2-1", "2.1.21", "21")

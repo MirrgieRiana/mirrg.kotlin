@@ -23,7 +23,18 @@ tasks.register("generate") {
 }
 
 kotlin {
+#if [2.0.0,]
+    jvm {
+#if [2.0.0,2.1.0)
+        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+#endif
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_<%= jvmTarget %>)
+        }
+    }
+#else
     jvm()
+#endif
 #if [1.9.0,]
     js {
 #else
@@ -88,6 +99,14 @@ kotlin {
     }
 }
 
+#if [,2.0.0)
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "<%= jvmTarget %>"
+    }
+}
+
+#endif
 tasks.withType<Jar>().configureEach {
     from(outerProjectDirectory.file("LICENSE")) {
         into("META-INF")
