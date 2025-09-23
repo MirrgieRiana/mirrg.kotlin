@@ -16,10 +16,10 @@ class CollectionTest {
         assertEquals(null, listOf<String>().asSequence().notNoneOrNull?.join())
     }
 
+    private fun Iterable<Int>.f() = this.join("") { "$it" }
+
     @Test
     fun separate() {
-        fun Iterable<Int>.f() = this.join("") { "$it" }
-
         assertEquals("14243", listOf(1, 2, 3).separate(4).f())
 
         assertEquals("123", listOf(1, 2, 3).separate().f())
@@ -34,8 +34,6 @@ class CollectionTest {
 
     @Test
     fun concat() {
-        fun Iterable<Int>.f() = this.join("") { "$it" }
-
         assertEquals("1278347856", listOf(listOf(1, 2), listOf(3, 4), listOf(5, 6)).concat(7, 8).f())
 
         assertEquals("12734756", listOf(listOf(1, 2), listOf(3, 4), listOf(5, 6)).concat(7).f())

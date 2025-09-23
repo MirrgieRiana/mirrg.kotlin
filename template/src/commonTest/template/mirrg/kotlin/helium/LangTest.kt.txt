@@ -84,16 +84,18 @@ class LangTest {
 
     }
 
+    private class Wrapper<T>(val value: T) // 任意の型を受け取る型引数を持っているかのテスト用
+
+    private fun createWrapper(): Wrapper<Int>? = Wrapper(10) // Any?を受理し、かつreifiedでない場合にのみ渡すことができる
+    private fun <T> getValue(wrapper: Wrapper<T>?) = wrapper!!.value // 渡した型が戻り値にも表れることのテスト
+
+    private fun getNullableString(): String? = "10" // 最適化防止
+
     @Test
     fun evalTest() {
 
         // 最後の戻り値を返す
         run {
-
-            class Wrapper<T>(val value: T) // 任意の型を受け取る型引数を持っているかのテスト用
-
-            fun createWrapper(): Wrapper<Int>? = Wrapper(10) // Any?を受理し、かつreifiedでない場合にのみ渡すことができる
-            fun <T> getValue(wrapper: Wrapper<T>?) = wrapper!!.value // 渡した型が戻り値にも表れることのテスト
 
             // レシーバー無し版
             assertEquals(10, getValue(mirrg.kotlin.helium.eval { createWrapper() }))
@@ -140,7 +142,7 @@ class LangTest {
 
         // thisを新たに作らない
         run {
-            val nullable: String? = "10".takeIf { measureTime {}.toDouble(DurationUnit.DAYS) < 1_000_000.0 } // 最適化防止
+            val nullable: String? = getNullableString()
             nullable.run outer@{
                 assertEquals(10, run {
                     this@outer!!
@@ -150,7 +152,7 @@ class LangTest {
             }
         }
         run {
-            val nullable: String? = "10".takeIf { measureTime {}.toDouble(DurationUnit.DAYS) < 1_000_000.0 } // 最適化防止
+            val nullable: String? = getNullableString()
             nullable.run outer@{
                 assertEquals(10, mirrg.kotlin.helium.eval {
                     this@outer!!
@@ -159,7 +161,7 @@ class LangTest {
             }
         }
         run {
-            val nullable: String? = "10".takeIf { measureTime {}.toDouble(DurationUnit.DAYS) < 1_000_000.0 } // 最適化防止
+            val nullable: String? = getNullableString()
             nullable.run outer@{
                 assertEquals(10, "receiver".eval {
                     this@outer!!
