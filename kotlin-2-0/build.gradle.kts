@@ -81,7 +81,7 @@ kotlin {
                     println("Generating $outputFile")
                     val input = inputFile.readText()
                     val arguments = Template.Arguments(
-                        versionString = "2.1.21",
+                        versionString = "2.0.21",
                         parameters = mapOf(),
                     )
                     val output = Template.evaluate(input, arguments)
