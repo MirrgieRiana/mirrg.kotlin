@@ -114,6 +114,9 @@ kotlin {
         @Suppress("unused")
         val commonMain by getting {
             setGeneration()
+#if [1.6.0,1.7.0)
+            languageSettings.optIn("kotlin.RequiresOptIn")
+#endif
         }
 
         @Suppress("unused")
@@ -122,6 +125,9 @@ kotlin {
                 implementation(kotlin("test"))
             }
             setGeneration()
+#if [1.6.0,1.7.0)
+            languageSettings.optIn("kotlin.RequiresOptIn")
+#endif
         }
     }
 #if [,1.7.0)
