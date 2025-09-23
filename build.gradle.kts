@@ -27,12 +27,12 @@ tasks.register("generateBuildScripts") {
     group = "generation"
 }
 
-fun configureSubBuild(
-    distributionSuffix: String,
+fun configureVariant(
+    variantSuffix: String,
     kotlinVersion: String,
     jvmTarget: String,
 ) {
-    val includedBuild = if (gradle.includedBuilds.any { it.name == distributionSuffix }) gradle.includedBuild(distributionSuffix) else null
+    val includedBuild = if (gradle.includedBuilds.any { it.name == variantSuffix }) gradle.includedBuild(variantSuffix) else null
 
     if (includedBuild != null) {
         fun configureTask(taskName: String) {
@@ -46,11 +46,11 @@ fun configureSubBuild(
         configureTask("publish")
     }
 
-    val task = tasks.register("generate${distributionSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
+    val task = tasks.register("generate${variantSuffix.uppercaseFirstChar().replace("-", "")}BuildScripts") {
         group = "generation"
         doLast {
             val inputDir = project.layout.projectDirectory.dir("template")
-            val outputDir = project.layout.projectDirectory.dir(distributionSuffix)
+            val outputDir = project.layout.projectDirectory.dir(variantSuffix)
 
             val files = inputDir.asFile.listFiles().filter { it.isFile && it.name.endsWith(".kts.txt") }
             files.forEach { inputFile ->
@@ -60,7 +60,7 @@ fun configureSubBuild(
                 val arguments = Template.Arguments(
                     versionString = kotlinVersion,
                     parameters = mapOf(
-                        "distributionSuffix" to distributionSuffix,
+                        "variantSuffix" to variantSuffix,
                         "kotlinVersion" to kotlinVersion,
                         "jvmTarget" to jvmTarget,
                     ),
@@ -74,9 +74,9 @@ fun configureSubBuild(
     tasks.named("generateBuildScripts").configure { dependsOn(task) }
 
 }
-configureSubBuild("kotlin-1-7", "1.7.21", "17")
-configureSubBuild("kotlin-1-8", "1.8.22", "17")
-configureSubBuild("kotlin-1-9", "1.9.25", "21")
-configureSubBuild("kotlin-2-0", "2.0.21", "21")
-configureSubBuild("kotlin-2-1", "2.1.21", "21")
-configureSubBuild("kotlin-2-2", "2.2.20", "21")
+configureVariant("kotlin-1-7", "1.7.21", "17")
+configureVariant("kotlin-1-8", "1.8.22", "17")
+configureVariant("kotlin-1-9", "1.9.25", "21")
+configureVariant("kotlin-2-0", "2.0.21", "21")
+configureVariant("kotlin-2-1", "2.1.21", "21")
+configureVariant("kotlin-2-2", "2.2.20", "21")

@@ -14,8 +14,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "mirrg.kotlin.helium"
 
-fun includeIfGenerated(distributionSuffix: String) {
-    if (rootProject.projectDir.resolve("$distributionSuffix/build.gradle.kts").exists()) includeBuild(distributionSuffix)
+fun includeIfGenerated(variantSuffix: String) {
+    if (rootProject.projectDir.resolve("$variantSuffix/build.gradle.kts").exists()) includeBuild(variantSuffix)
 }
 includeIfGenerated("kotlin-1-7")
 includeIfGenerated("kotlin-1-8")
