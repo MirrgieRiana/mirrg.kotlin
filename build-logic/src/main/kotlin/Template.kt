@@ -21,7 +21,7 @@ object Template {
         }
     }
 
-    private fun parseLinesLiteral(input: MutableList<String>): Node {
+    private fun tryParseLinesLiteral(input: MutableList<String>): Node? {
         val lines = mutableListOf<String>()
 
         while (true) {
@@ -31,21 +31,21 @@ object Template {
             input.removeFirst()
         }
 
-        return LinesLiteralNode(lines)
+        return if (lines.isEmpty()) null else LinesLiteralNode(lines)
     }
+
 
     private class ErrorNode : Node() {
         override fun evaluate(arguments: Arguments) = throw RuntimeException("Generation failed")
     }
 
-    private fun parseBlock(input: MutableList<String>): Node {
+    private fun tryParseError(input: MutableList<String>): Node? {
         val line = input.firstOrNull()
-        if (line == "#error") {
-            input.removeFirst()
-            return ErrorNode()
-        }
-        return parseLinesLiteral(input)
+        if (line == null || line != "#error") return null
+        input.removeFirst()
+        return ErrorNode()
     }
+
 
     private class IfSection(val versionRangeString: String?, val body: Node)
 
@@ -104,34 +104,24 @@ object Template {
         return IfNode(sections)
     }
 
-    private class RootResult(val head: Node, val tail: List<Pair<Node, Node>>) : Node() {
-        override fun evaluate(arguments: Arguments): List<String> {
-            val lines = mutableListOf<String>()
-            lines += head.evaluate(arguments)
-            tail.forEach {
-                lines += it.first.evaluate(arguments)
-                lines += it.second.evaluate(arguments)
-            }
-            return lines
-        }
+
+    private class BlockNode(val nodes: List<Node>) : Node() {
+        override fun evaluate(arguments: Arguments) = nodes.flatMap { it.evaluate(arguments) }
     }
 
-    private fun parseRoot(input: MutableList<String>): Node {
-        val head = parseBlock(input)
-        val tail = mutableListOf<Pair<Node, Node>>()
+    private fun parseBlock(input: MutableList<String>): Node {
+        val nodes = mutableListOf<Node>()
         while (true) {
-            val ifResult = tryParseIf(input)
-            if (ifResult == null) break
-            val body = parseBlock(input)
-            tail += Pair(ifResult, body)
+            val node = tryParseLinesLiteral(input) ?: tryParseIf(input) ?: tryParseError(input) ?: break
+            nodes += node
         }
-        return RootResult(head, tail)
+        return BlockNode(nodes)
     }
 
 
     fun parse(lines: List<String>): Node {
         val input = lines.toMutableList()
-        val node = parseRoot(input)
+        val node = parseBlock(input)
         check(input.isEmpty())
         return node
     }
