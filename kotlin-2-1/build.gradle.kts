@@ -18,6 +18,10 @@ repositories {
     mavenCentral()
 }
 
+tasks.register("generate") {
+    group = "generation"
+}
+
 kotlin {
     jvm()
     js {
@@ -63,6 +67,7 @@ kotlin {
                 filter { Template.evaluate(it, Template.Arguments("2.1.21", mapOf())) }
             }
         }
+        project.tasks.named("generate").configure { dependsOn(generateTask) }
         kotlin.setSrcDirs(listOf(generateTask))
     }
 

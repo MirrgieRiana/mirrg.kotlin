@@ -14,6 +14,10 @@ sourceSets {
     }
 }
 
+tasks.register("generate") {
+    group = "generation"
+}
+
 tasks.register("publish") {
     group = "publishing"
 }
@@ -30,6 +34,7 @@ fun configureSubBuild(distributionSuffix: String, kotlinVersion: String) {
         fun configureTask(taskName: String) {
             tasks.named(taskName).configure { dependsOn(includedBuild.task(":$taskName")) }
         }
+        configureTask("generate")
         configureTask("clean")
         configureTask("build")
         configureTask("check")
