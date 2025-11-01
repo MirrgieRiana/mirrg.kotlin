@@ -35,3 +35,12 @@ fun <T> Iterable<Iterable<T>>.concatWith(separators: Iterable<T>): List<T> {
 }
 
 fun <T> Iterable<Iterable<T>>.concat(vararg separators: T) = this.concatWith(separators.asIterable())
+
+
+fun <K, V : Any> MutableMap<K, V>.putOrRemove(key: K, value: V?): V? {
+    return if (value == null) {
+        this.remove(key)
+    } else {
+        this.put(key, value)
+    }
+}
