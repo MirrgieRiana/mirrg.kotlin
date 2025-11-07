@@ -8,6 +8,9 @@ val <I> Array<I>.notEmptyOrNull get() = takeIf { isNotEmpty() }
 val <T : Sequence<I>, I> T.notNoneOrNull get() = takeIf { !none() }
 
 
+fun <K, V> mapOfNotNull(vararg pairs: Pair<K, V>?): Map<K, V> = pairs.filterNotNull().toMap()
+
+
 fun <T> Iterable<T>.separateWith(separators: Iterable<T>): List<T> {
     val i = this.iterator()
     if (!i.hasNext()) return listOf()
