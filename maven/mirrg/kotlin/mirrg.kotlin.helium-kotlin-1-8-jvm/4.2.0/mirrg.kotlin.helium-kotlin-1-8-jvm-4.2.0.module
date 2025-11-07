@@ -1,0 +1,113 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-1-8/4.2.0/mirrg.kotlin.helium-kotlin-1-8-4.2.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-1-8",
+    "version": "4.2.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.22"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8-jvm-4.2.0.jar",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-jvm-4.2.0.jar",
+          "size": 20665,
+          "sha512": "677fe605ac6c617e1fe5b92a4c93b0e1b60521ae1a60ef4cbf3facd1bfa848d9ffb14f372c778b6396272051d9631977f5c06f58605e0420efd161f1f3cd8771",
+          "sha256": "c93574f84c59aa0aef379f580f3744f027e0d38cf3d60f5e4fe23a6217364d71",
+          "sha1": "92b2bd3cb934ec82c1f1979193d763b3172483a7",
+          "md5": "a263b16c67e857f9a0a99c9d863c6e63"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.8.22"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8-jvm-4.2.0.jar",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-jvm-4.2.0.jar",
+          "size": 20665,
+          "sha512": "677fe605ac6c617e1fe5b92a4c93b0e1b60521ae1a60ef4cbf3facd1bfa848d9ffb14f372c778b6396272051d9631977f5c06f58605e0420efd161f1f3cd8771",
+          "sha256": "c93574f84c59aa0aef379f580f3744f027e0d38cf3d60f5e4fe23a6217364d71",
+          "sha1": "92b2bd3cb934ec82c1f1979193d763b3172483a7",
+          "md5": "a263b16c67e857f9a0a99c9d863c6e63"
+        }
+      ]
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8-jvm-4.2.0-sources.jar",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-jvm-4.2.0-sources.jar",
+          "size": 3668,
+          "sha512": "88e69b0a944fe896966342f4108ed2effa9da1b5deab08ba414424fcd1cd64e81a5ac3ef5b509c8a451141dbba19abefcaa8256205b62336fb6c341b42573ea2",
+          "sha256": "2e82a2c8712db07e240ef87e1102ac3eaf7d9091d72119be618ec1204fbc8d90",
+          "sha1": "a85c6845aed7e8355126fedebfd007e6a91dafca",
+          "md5": "4893911cd7d818cc631dbbd20993c8e4"
+        }
+      ]
+    }
+  ]
+}
