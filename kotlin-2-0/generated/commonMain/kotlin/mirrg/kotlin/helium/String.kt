@@ -12,14 +12,44 @@ fun String.escapeRegex() = this.replace("""[.\[^$()*+?{|\\]""".toRegex()) { "\\"
 
 
 // toStringを呼び出さないjoin
+// TODO Change default separator to empty string
 
+@Deprecated("Default separator is planned to be changed to empty string in future versions.")
 fun <T : CharSequence> Iterable<T>.join(separator: CharSequence = ", ") = joinToString(separator)
+
+@Deprecated("Default separator is planned to be changed to empty string in future versions.")
 fun <T : CharSequence> Array<T>.join(separator: CharSequence = ", ") = joinToString(separator)
+
+@Deprecated("Default separator is planned to be changed to empty string in future versions.")
 fun <T : CharSequence> Sequence<T>.join(separator: CharSequence = ", ") = joinToString(separator)
 
+@Deprecated("Default separator is planned to be changed to empty string in future versions.")
 fun <T> Iterable<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+@Deprecated("Default separator is planned to be changed to empty string in future versions.")
 fun <T> Array<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+@Deprecated("Default separator is planned to be changed to empty string in future versions.")
 fun <T> Sequence<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+
+@Deprecated("Removing.")
+fun <T : CharSequence> Iterable<T>.join2(separator: CharSequence = "") = joinToString(separator)
+
+@Deprecated("Removing.")
+fun <T : CharSequence> Array<T>.join2(separator: CharSequence = "") = joinToString(separator)
+
+@Deprecated("Removing.")
+fun <T : CharSequence> Sequence<T>.join2(separator: CharSequence = "") = joinToString(separator)
+
+@Deprecated("Removing.")
+fun <T> Iterable<T>.join2(separator: CharSequence = "", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+@Deprecated("Removing.")
+fun <T> Array<T>.join2(separator: CharSequence = "", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+@Deprecated("Removing.")
+fun <T> Sequence<T>.join2(separator: CharSequence = "", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
 
 
 /** 先頭の文字のみを大文字にします。 */
