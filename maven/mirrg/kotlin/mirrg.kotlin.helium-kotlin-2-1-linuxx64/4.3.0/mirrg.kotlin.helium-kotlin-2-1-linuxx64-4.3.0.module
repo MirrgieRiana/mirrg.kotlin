@@ -1,0 +1,73 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-2-1/4.3.0/mirrg.kotlin.helium-kotlin-2-1-4.3.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-2-1",
+    "version": "4.3.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-2-1-linuxX64Main-4.3.0.klib",
+          "url": "mirrg.kotlin.helium-kotlin-2-1-linuxx64-4.3.0.klib",
+          "size": 24495,
+          "sha512": "621796d53084f3fbaa013eb0cb995e7afd7596a903f689d31c6b163dc2a7c621e2c8ee6b077777cbbe599ca500c26ded0646c46160dbcc9e3f56bb3a2132a831",
+          "sha256": "baac375af5fdac043903888b7f740db8409f253fc378025af49409fadc24e095",
+          "sha1": "3580a9390627eb1c0ac97abd1869dc35d4307193",
+          "md5": "0e7c832418b598b46367b155d5ac38a8"
+        }
+      ]
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-2-1-linuxx64-4.3.0-sources.jar",
+          "url": "mirrg.kotlin.helium-kotlin-2-1-linuxx64-4.3.0-sources.jar",
+          "size": 3797,
+          "sha512": "10b2749af16fe3e272cc741a193ab9d8c8b635c44c4c4ddd483ba3a737544ff39ec390e5f3d2b3e99d397e74fd7770183a49dde6c277651d9bbfdc672c95e2e5",
+          "sha256": "f774c0348ba67ca581353115b1eea93207dd3c1dc88a78548caf7ce81a7780e3",
+          "sha1": "c1e847f8c4faf3dfb9da97744313ee5a27cdfb21",
+          "md5": "73401ad3093fe01879126c8e622408d9"
+        }
+      ]
+    }
+  ]
+}
