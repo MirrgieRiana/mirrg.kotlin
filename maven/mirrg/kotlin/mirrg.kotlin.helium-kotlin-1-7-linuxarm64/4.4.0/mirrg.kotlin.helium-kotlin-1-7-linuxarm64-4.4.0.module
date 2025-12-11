@@ -1,0 +1,49 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-1-7/4.4.0/mirrg.kotlin.helium-kotlin-1-7-4.4.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-1-7",
+    "version": "4.4.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.7.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-7.klib",
+          "url": "mirrg.kotlin.helium-kotlin-1-7-linuxarm64-4.4.0.klib",
+          "size": 25333,
+          "sha512": "e320f1e65ae6a39d39ef8e4a31625b92736cd578a21d29c901f476551e6853b9a97247d6d298302f79c54e9196e60a331603366f6ba686afebb50148597c41d5",
+          "sha256": "e60d3b894180700a0662c3b8feae67bc30b220044b07310e52199940bf2e1396",
+          "sha1": "192b5cd066bffa29c5a8551c4785a089267126cf",
+          "md5": "88502c8e4b6881bbe1dfe040b402decf"
+        }
+      ]
+    }
+  ]
+}

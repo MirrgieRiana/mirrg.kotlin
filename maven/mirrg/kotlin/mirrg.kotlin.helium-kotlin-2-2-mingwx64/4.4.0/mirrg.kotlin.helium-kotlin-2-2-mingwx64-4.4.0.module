@@ -1,0 +1,73 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-2-2/4.4.0/mirrg.kotlin.helium-kotlin-2-2-4.4.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-2-2",
+    "version": "4.4.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "mingwX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.20"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-2-2-mingwX64Main-4.4.0.klib",
+          "url": "mirrg.kotlin.helium-kotlin-2-2-mingwx64-4.4.0.klib",
+          "size": 26030,
+          "sha512": "1d36551b9ae5be85776e2d658a051d2386f116a46c3b88b900b49e2ac7a66be5a91736a353fe285a149d814118430f19aff0fdfef1b52f5fa4eb7d795c63e6b2",
+          "sha256": "d3c87ec0eb3f180c4bea9f0746ed6f80222a88ba78e1bde5b0a60a284e3f770a",
+          "sha1": "d41c3ca117c13588071a610462af3cbc34602bd9",
+          "md5": "f6627c595846f63efead971713921481"
+        }
+      ]
+    },
+    {
+      "name": "mingwX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-2-2-mingwx64-4.4.0-sources.jar",
+          "url": "mirrg.kotlin.helium-kotlin-2-2-mingwx64-4.4.0-sources.jar",
+          "size": 4028,
+          "sha512": "5ef4b0c357557f9dbd9b211aeb51bc8ee7c816125ccb0f977761f621ea10c6e0f9b11a37ed28036a916f582c550f8136405c1c51d6eeadc15f367df9398b8dfd",
+          "sha256": "dfe319ee38219a70fd6a327c62442fa5c9f7300902beacfcd24ac86783d7ee8a",
+          "sha1": "4c1e2fcd3897c74d99fbe3411ba98bf3744d189a",
+          "md5": "f9cf3bbfc427f9ab74b6359e49c7133d"
+        }
+      ]
+    }
+  ]
+}
