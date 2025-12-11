@@ -65,6 +65,12 @@ fun String.toUpperCamelCase(beforeDelimiter: String = "_", afterDelimiter: Strin
 fun String.toLowerCamelCase(beforeDelimiter: String = "_", afterDelimiter: String = "") = split(beforeDelimiter).mapIndexed { i, it -> if (i == 0) it else it.toUpperCaseHead() }.join(afterDelimiter)
 
 
+/**
+ * 文字列を指定した長さに切り詰めます。切り詰めた場合は末尾に `suffix` を追加します。
+ * この関数はサロゲートペアの途中で切り詰めることがあります。
+ */
+fun String.truncate(max: Int, suffix: String = "...") = if (length > max) take(max) + suffix else this
+
 // Regex
 
 fun CharSequence.match(regex: Regex) = regex.matchEntire(this)
