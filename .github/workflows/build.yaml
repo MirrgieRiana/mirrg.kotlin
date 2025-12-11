@@ -1,0 +1,43 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          path: build
+
+      - name: Javaのセットアップ
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: ビルド
+        working-directory: build
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon execBuildKotlin16
+          ./gradlew --no-daemon execBuildKotlin17
+          ./gradlew --no-daemon execBuildKotlin18
+          ./gradlew --no-daemon execBuildKotlin19
+          ./gradlew --no-daemon execBuildKotlin20
+          ./gradlew --no-daemon execBuildKotlin21
+          ./gradlew --no-daemon execBuildKotlin22
