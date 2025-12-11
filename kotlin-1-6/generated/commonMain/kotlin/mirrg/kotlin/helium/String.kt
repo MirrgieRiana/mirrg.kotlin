@@ -12,25 +12,38 @@ fun String.escapeRegex() = this.replace("""[.\[^$()*+?{|\\]""".toRegex()) { "\\"
 
 
 // toStringを呼び出さないjoin
+
+fun <T : CharSequence> Iterable<T>.join(separator: CharSequence) = joinToString(separator)
+
+fun <T : CharSequence> Array<T>.join(separator: CharSequence) = joinToString(separator)
+
+fun <T : CharSequence> Sequence<T>.join(separator: CharSequence) = joinToString(separator)
+
+fun <T> Iterable<T>.join(separator: CharSequence, transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+fun <T> Array<T>.join(separator: CharSequence, transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
+fun <T> Sequence<T>.join(separator: CharSequence, transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+
 // TODO Change default separator to empty string
 
 @Deprecated("Default separator is planned to be changed to empty string in future versions.")
-fun <T : CharSequence> Iterable<T>.join(separator: CharSequence = ", ") = joinToString(separator)
+fun <T : CharSequence> Iterable<T>.join() = joinToString(", ")
 
 @Deprecated("Default separator is planned to be changed to empty string in future versions.")
-fun <T : CharSequence> Array<T>.join(separator: CharSequence = ", ") = joinToString(separator)
+fun <T : CharSequence> Array<T>.join() = joinToString(", ")
 
 @Deprecated("Default separator is planned to be changed to empty string in future versions.")
-fun <T : CharSequence> Sequence<T>.join(separator: CharSequence = ", ") = joinToString(separator)
+fun <T : CharSequence> Sequence<T>.join() = joinToString(", ")
 
 @Deprecated("Default separator is planned to be changed to empty string in future versions.")
-fun <T> Iterable<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+fun <T> Iterable<T>.join(transform: (T) -> CharSequence) = joinToString(", ", transform = transform)
 
 @Deprecated("Default separator is planned to be changed to empty string in future versions.")
-fun <T> Array<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+fun <T> Array<T>.join(transform: (T) -> CharSequence) = joinToString(", ", transform = transform)
 
 @Deprecated("Default separator is planned to be changed to empty string in future versions.")
-fun <T> Sequence<T>.join(separator: CharSequence = ", ", transform: (T) -> CharSequence) = joinToString(separator, transform = transform)
+fun <T> Sequence<T>.join(transform: (T) -> CharSequence) = joinToString(", ", transform = transform)
 
 
 @Deprecated("Removing.")
