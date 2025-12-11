@@ -20,7 +20,7 @@ jobs:
       - name: リポジトリのチェックアウト
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           path: build
 
       - name: タグとブランチの検証
@@ -59,7 +59,7 @@ jobs:
         with:
           path: maven
           ref: maven
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: ビルド
         env:
