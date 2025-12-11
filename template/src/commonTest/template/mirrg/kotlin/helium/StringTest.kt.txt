@@ -97,4 +97,17 @@ class StringTest {
         assertEquals("Abc.123abc.Abc-abc.Abc", "Abc_123abc_abc-abc_Abc".toUpperCamelCase("_", "."))
         assertEquals("Abc.123abc.Abc-abc.Abc", "Abc_123abc_abc-abc_Abc".toLowerCamelCase("_", "."))
     }
+
+    @Test
+    fun truncateTest() {
+        assertEquals("", "".truncate(6))
+        assertEquals("123", "123".truncate(6))
+        assertEquals("12345", "12345".truncate(6))
+        assertEquals("123456", "123456".truncate(6))
+        assertEquals("123456...", "1234567".truncate(6))
+        assertEquals("123456...", "123456789".truncate(6))
+
+        assertEquals("", "".truncate(0))
+        assertEquals("...", "1".truncate(0))
+    }
 }
