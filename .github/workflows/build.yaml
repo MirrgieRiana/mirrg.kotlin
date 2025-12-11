@@ -3,10 +3,10 @@ name: build
 on:
   push:
     branches:
-      - main
+      - helium
   pull_request:
     branches:
-      - main
+      - helium
 
 concurrency:
   group: build-${{ github.ref }}
