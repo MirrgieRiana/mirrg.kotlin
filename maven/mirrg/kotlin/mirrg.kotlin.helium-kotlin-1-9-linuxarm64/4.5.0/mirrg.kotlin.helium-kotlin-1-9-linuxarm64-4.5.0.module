@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-1-9/4.5.0/mirrg.kotlin.helium-kotlin-1-9-4.5.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-1-9",
+    "version": "4.5.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-9.klib",
+          "url": "mirrg.kotlin.helium-kotlin-1-9-linuxarm64-4.5.0.klib",
+          "size": 32777,
+          "sha512": "1c9fb713a9bf59c4a17d397854716dc123d064c75a4820e25242c799da286f86aa5733e2d027b065d8c4f139a24ce538ce94ab0dcdaa3c74090a389469e7ac61",
+          "sha256": "77358ba9f8bb4b37caadf9d9cb2115664b3e81d82471904e07f4be390abf3656",
+          "sha1": "183b263d5131b107931c0f60b664ffdb7ee9e991",
+          "md5": "8aa93d9d594e7b3b32bd50e3affd301b"
+        }
+      ]
+    },
+    {
+      "name": "linuxArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-9-linuxarm64-4.5.0-sources.jar",
+          "url": "mirrg.kotlin.helium-kotlin-1-9-linuxarm64-4.5.0-sources.jar",
+          "size": 4812,
+          "sha512": "9024aa2d8a4867023d29d1ad20d7946b2729090a4c4a0567cb0be4dd808d5f5dc2611d0bf60e18261409071612a830da5684699829e5302ee086826e8b15c76d",
+          "sha256": "18ade4c87f947dd1ef171a6db316e527107256bbc1ad5f33ea83371863106e2c",
+          "sha1": "0fe302e3b1c35ff6f3dbbb73bdc59721e4c87b6f",
+          "md5": "37e8c755ce9b87e8e0cc12bc1c69b070"
+        }
+      ]
+    }
+  ]
+}

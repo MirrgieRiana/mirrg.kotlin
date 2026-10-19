@@ -1,0 +1,91 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-1-6/4.5.0/mirrg.kotlin.helium-kotlin-1-6-4.5.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-1-6",
+    "version": "4.5.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.6.6"
+    }
+  },
+  "variants": [
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-js",
+          "version": {
+            "requires": "1.6.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-6-js-4.5.0.klib",
+          "url": "mirrg.kotlin.helium-kotlin-1-6-js-4.5.0.klib",
+          "size": 32178,
+          "sha512": "2b35a7d897a9dfff023f43edd485ca764a48604d5635e8ea685f3b58513d467589ce093a13ad0c837501e43517e9555fb0f10e1f97498e3db7aa92050085abdf",
+          "sha256": "77c7a0e93af251f829d07acd4e79bd4f80d364cbed4b08775d32b04e06b94461",
+          "sha1": "7f003bcbb7d401984c6bc4067cdbcfaa50ebc3a4",
+          "md5": "418ee7581a0b2ee50f6195f0abd14a2c"
+        }
+      ]
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-js",
+          "version": {
+            "requires": "1.6.21"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.6.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-6-js-4.5.0.klib",
+          "url": "mirrg.kotlin.helium-kotlin-1-6-js-4.5.0.klib",
+          "size": 32178,
+          "sha512": "2b35a7d897a9dfff023f43edd485ca764a48604d5635e8ea685f3b58513d467589ce093a13ad0c837501e43517e9555fb0f10e1f97498e3db7aa92050085abdf",
+          "sha256": "77c7a0e93af251f829d07acd4e79bd4f80d364cbed4b08775d32b04e06b94461",
+          "sha1": "7f003bcbb7d401984c6bc4067cdbcfaa50ebc3a4",
+          "md5": "418ee7581a0b2ee50f6195f0abd14a2c"
+        }
+      ]
+    }
+  ]
+}
