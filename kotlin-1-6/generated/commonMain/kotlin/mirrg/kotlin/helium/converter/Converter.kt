@@ -10,7 +10,7 @@ fun <C, T> Converter<C, T>.decode(code: C) = this.decoder(code)
 
 val <C, T> Converter<C, T>.reverse get() = Converter(encoder, decoder)
 
-fun <A, B, C> Converter<A, B>.map(decoder2: (B) -> C, encoder2: (C) -> B): Converter<B, C> = Converter({ this.decode(decoder2(it)) }, { encoder2(this.encode(it)) })
+fun <A, B, C> Converter<A, B>.map(decoder2: (B) -> C, encoder2: (C) -> B): Converter<A, C> = Converter({ decoder2(this.decode(it)) }, { this.encode(encoder2(it)) })
 fun <A, B, C> Converter<A, B>.map(converter: Converter<B, C>) = this.map(converter.decoder, converter.encoder)
 operator fun <A, B, C> Converter<A, B>.times(converter: Converter<B, C>) = this.map(converter)
 
