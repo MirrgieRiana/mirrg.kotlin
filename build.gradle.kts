@@ -115,6 +115,7 @@ fun configureVariant(
                 "org.gradle.java.home" to javaToolchains.launcherFor {
                     languageVersion = JavaLanguageVersion.of(gradleJavaVersion)
                 }.get().metadata.installationPath.asFile.absolutePath,
+                "org.gradle.jvmargs" to "-Xmx4g -XX:MaxMetaspaceSize=1g",
             )
             val string = properties
                 .map { "${it.key}=${it.value.replace("\\", "\\\\")}" }
