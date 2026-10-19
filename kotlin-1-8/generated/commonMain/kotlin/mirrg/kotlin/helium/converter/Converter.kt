@@ -5,8 +5,8 @@ package mirrg.kotlin.helium.converter
 
 class Converter<C, T>(val decoder: (C) -> T, val encoder: (T) -> C)
 
-fun <C, T> Converter<C, T>.encode(value: T) = this.encoder(value)
 fun <C, T> Converter<C, T>.decode(code: C) = this.decoder(code)
+fun <C, T> Converter<C, T>.encode(value: T) = this.encoder(value)
 
 val <C, T> Converter<C, T>.reverse get() = Converter(encoder, decoder)
 
