@@ -122,6 +122,10 @@ kotlin {
     }
 }
 
+rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension> {
+    resolution("node-releases", "2.0.44")
+}
+
 tasks.withType<Jar>().configureEach {
     from(outerProjectDirectory.file("LICENSE")) {
         into("META-INF")

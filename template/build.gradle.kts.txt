@@ -143,6 +143,12 @@ kotlin {
 #endif
 }
 
+#if [,1.8.0)
+rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension> {
+    resolution("node-releases", "2.0.44")
+}
+
+#endif
 #if [1.7.0,2.0.0)
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     kotlinOptions {

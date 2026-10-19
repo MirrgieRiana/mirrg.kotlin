@@ -112,6 +112,10 @@ kotlin {
     }
 }
 
+rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension> {
+    resolution("node-releases", "2.0.44")
+}
+
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "17"
