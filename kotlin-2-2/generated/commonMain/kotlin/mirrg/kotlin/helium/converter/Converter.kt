@@ -3,22 +3,22 @@
 package mirrg.kotlin.helium.converter
 
 
-class Converter<T, C>(val encoder: (T) -> C, val decoder: (C) -> T)
+class Converter<C, T>(val decoder: (C) -> T, val encoder: (T) -> C)
 
-fun <T, C> Converter<T, C>.encode(value: T) = this.encoder(value)
-fun <T, C> Converter<T, C>.decode(code: C) = this.decoder(code)
+fun <C, T> Converter<C, T>.encode(value: T) = this.encoder(value)
+fun <C, T> Converter<C, T>.decode(code: C) = this.decoder(code)
 
-val <T, C> Converter<T, C>.reverse get() = Converter(decoder, encoder)
+val <C, T> Converter<C, T>.reverse get() = Converter(encoder, decoder)
 
-fun <T, C1, C2> Converter<T, C1>.map(encoder2: (C1) -> C2, decoder2: (C2) -> C1): Converter<T, C2> = Converter({ encoder2(this.encode(it)) }, { this.decode(decoder2(it)) })
-fun <T, C1, C2> Converter<T, C1>.map(converter: Converter<C1, C2>) = this.map(converter.encoder, converter.decoder)
-operator fun <T, C1, C2> Converter<T, C1>.times(converter: Converter<C1, C2>) = this.map(converter)
+fun <A, B, C> Converter<A, B>.map(decoder2: (B) -> C, encoder2: (C) -> B): Converter<B, C> = Converter({ this.decode(decoder2(it)) }, { encoder2(this.encode(it)) })
+fun <A, B, C> Converter<A, B>.map(converter: Converter<B, C>) = this.map(converter.decoder, converter.encoder)
+operator fun <A, B, C> Converter<A, B>.times(converter: Converter<B, C>) = this.map(converter)
 
 
 object Converters {
-    fun <T, C> fixed(value: T, code: C) = Converter<T, C>({ code }, { value })
+    fun <C, T> fixed(code: C, value: T) = Converter<C, T>({ value }, { code })
     fun <T> identity() = Converter<T, T>({ it }, { it })
 
-    val INT_TO_STRING = Converter<Int, String>({ it.toString() }, { it.toInt() })
-    val STRING_TO_BYTE_ARRAY = Converter<String, ByteArray>({ it.encodeToByteArray() }, { it.decodeToString() })
+    val STRING_TO_INT = Converter<String, Int>({ it.toInt() }, { it.toString() })
+    val BYTE_ARRAY_TO_STRING = Converter<ByteArray, String>({ it.decodeToString() }, { it.encodeToByteArray() })
 }
