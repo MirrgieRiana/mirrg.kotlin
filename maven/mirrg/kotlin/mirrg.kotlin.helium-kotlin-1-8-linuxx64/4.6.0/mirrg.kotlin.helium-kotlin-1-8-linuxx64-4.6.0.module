@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-1-8/4.6.0/mirrg.kotlin.helium-kotlin-1-8-4.6.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-1-8",
+    "version": "4.6.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8.klib",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-linuxx64-4.6.0.klib",
+          "size": 34110,
+          "sha512": "b998ca87a9de31ca71c25a0c8c3318d31ff4d98c473021c3b4dbc276cba66e44f464fb01d9457d34d3caa732878f999a660638203236827f6bb04f3e8566c752",
+          "sha256": "9e20dea8deaeb9bd2007ab6a48a21ce3257c82114963829346d315eb97cbb56f",
+          "sha1": "556a3561ba33ebeec292b20630dbec9eb9d238ab",
+          "md5": "96731efb6394bdcf117eeaa253acec84"
+        }
+      ]
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8-linuxx64-4.6.0-sources.jar",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-linuxx64-4.6.0-sources.jar",
+          "size": 5910,
+          "sha512": "8e124814595582728ae5d87045daf5de663456622f076c82545803ce76b96f6c587b98c80c6215c45f88277cf5b704db00d00853bd25fde527d540251788915f",
+          "sha256": "19edc369cc1c4c4df3412bba17adc493623d9085db1e900dd091b1cc0e6b5655",
+          "sha1": "4e53a677eeceab539395e5d63994be935ad32100",
+          "md5": "7d30ee96ec437ecdda44f59f5fcac53b"
+        }
+      ]
+    }
+  ]
+}

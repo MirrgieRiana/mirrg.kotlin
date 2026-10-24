@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.helium-kotlin-1-8/4.6.0/mirrg.kotlin.helium-kotlin-1-8-4.6.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.helium-kotlin-1-8",
+    "version": "4.6.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "mingwX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-common",
+          "version": {
+            "requires": "1.8.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8.klib",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-mingwx64-4.6.0.klib",
+          "size": 34110,
+          "sha512": "a25ecc24727f19a2d451d847ea9cd85328a98cfe3f6f7314f13f85a8b07a08370d9645bf010e70f0692b0daa285c0fae32056bb05474c2440495e288952f70f5",
+          "sha256": "eef5e93d2edfe673c460a9f57de50ff806a7bdc792568c3b8cd2d2fd73df8f44",
+          "sha1": "a1beddd3ecd7290aaa838a0a48d5c241aead10d6",
+          "md5": "2345b7bffefd3d0ba49b45bd8308b52e"
+        }
+      ]
+    },
+    {
+      "name": "mingwX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.helium-kotlin-1-8-mingwx64-4.6.0-sources.jar",
+          "url": "mirrg.kotlin.helium-kotlin-1-8-mingwx64-4.6.0-sources.jar",
+          "size": 5910,
+          "sha512": "8e124814595582728ae5d87045daf5de663456622f076c82545803ce76b96f6c587b98c80c6215c45f88277cf5b704db00d00853bd25fde527d540251788915f",
+          "sha256": "19edc369cc1c4c4df3412bba17adc493623d9085db1e900dd091b1cc0e6b5655",
+          "sha1": "4e53a677eeceab539395e5d63994be935ad32100",
+          "md5": "7d30ee96ec437ecdda44f59f5fcac53b"
+        }
+      ]
+    }
+  ]
+}
