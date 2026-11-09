@@ -69,12 +69,12 @@ fun configureVariant(
     val generateVariantBuildScriptsTask = tasks.register("generate${variantSlug}BuildScripts") {
         group = "generation"
         val templateDir = project.layout.projectDirectory.dir("template")
-        val inputFiles = project.fileTree(templateDir) { include("*.kts.txt") }
+        val inputFiles = project.fileTree(templateDir) { include("*.kts") }
         inputs.files(inputFiles)
         outputs.dir(variantDir)
         doLast {
             inputFiles.files.forEach { inputFile ->
-                val outputFile = variantDir.file(inputFile.name.removeSuffix(".txt")).asFile
+                val outputFile = variantDir.file(inputFile.name).asFile
                 logger.lifecycle("Generating {}", outputFile)
                 val input = inputFile.readText()
                 outputFile.parentFile.mkdirs()
