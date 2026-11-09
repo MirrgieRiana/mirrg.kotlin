@@ -128,6 +128,3 @@ fun configureVariant(
 
 }
 configureVariant("kotlin-1-9", "1.9.25", "21", "8.14.3", 21)
-configureVariant("kotlin-2-0", "2.0.21", "21", "8.14.3", 21)
-configureVariant("kotlin-2-1", "2.1.21", "21", "8.14.3", 21)
-configureVariant("kotlin-2-2", "2.2.20", "21", "8.14.3", 21)
