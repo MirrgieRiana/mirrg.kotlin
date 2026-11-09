@@ -1,9 +1,5 @@
 
-#if [,1.7.0)
-fun String.uppercaseFirstChar() = this.take(1).toUpperCase() + this.drop(1)
-#else
 fun String.uppercaseFirstChar() = this.take(1).uppercase() + this.drop(1)
-#endif
 
 plugins {
     kotlin("multiplatform") version "<%= kotlinVersion %>"
@@ -38,11 +34,7 @@ kotlin {
 #else
     jvm()
 #endif
-#if [1.9.0,]
     js {
-#else
-    js(IR) {
-#endif
         browser()
         nodejs()
     }
@@ -126,30 +118,10 @@ kotlin {
             }
             setGeneration()
         }
-#if [1.6.0,1.7.0)
-
-        all {
-            languageSettings.optIn("kotlin.RequiresOptIn")
-        }
-#endif
     }
-#if [,1.7.0)
-
-    targets.withType<org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget>().configureEach {
-        compilations.all {
-            kotlinOptions.jvmTarget = "<%= jvmTarget %>"
-        }
-    }
-#endif
 }
 
-#if [,1.8.0)
-rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension> {
-    resolution("node-releases", "2.0.44")
-}
-
-#endif
-#if [1.7.0,2.0.0)
+#if [1.9.0,2.0.0)
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "<%= jvmTarget %>"
