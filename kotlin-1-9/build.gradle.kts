@@ -76,13 +76,8 @@ kotlin {
 
                     println("Generating $outputFile")
                     val input = inputFile.readText()
-                    val arguments = Template.Arguments(
-                        versionString = "1.9.25",
-                        parameters = mapOf(),
-                    )
-                    val output = Template.evaluate(input, arguments)
                     outputFile.parentFile.mkdirs()
-                    outputFile.writeText(output)
+                    outputFile.writeText(input)
 
                     oldOutputFiles.remove(outputFile)
                 }

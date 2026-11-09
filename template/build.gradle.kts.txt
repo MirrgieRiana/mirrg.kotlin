@@ -2,7 +2,7 @@
 fun String.uppercaseFirstChar() = this.take(1).uppercase() + this.drop(1)
 
 plugins {
-    kotlin("multiplatform") version "<%= kotlinVersion %>"
+    kotlin("multiplatform") version "1.9.25"
     `maven-publish`
     id("build-logic")
 }
@@ -74,13 +74,8 @@ kotlin {
 
                     println("Generating $outputFile")
                     val input = inputFile.readText()
-                    val arguments = Template.Arguments(
-                        versionString = "<%= kotlinVersion %>",
-                        parameters = mapOf(),
-                    )
-                    val output = Template.evaluate(input, arguments)
                     outputFile.parentFile.mkdirs()
-                    outputFile.writeText(output)
+                    outputFile.writeText(input)
 
                     oldOutputFiles.remove(outputFile)
                 }
@@ -112,7 +107,7 @@ kotlin {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = "<%= jvmTarget %>"
+        jvmTarget = "21"
     }
 }
 
