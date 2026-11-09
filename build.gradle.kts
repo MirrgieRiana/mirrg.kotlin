@@ -2,7 +2,6 @@ import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 
 plugins {
     java
-    id("build-logic")
 }
 
 sourceSets {

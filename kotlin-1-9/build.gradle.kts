@@ -6,7 +6,6 @@ fun String.uppercaseFirstChar() = this.take(1).uppercase() + this.drop(1)
 plugins {
     kotlin("multiplatform") version "1.9.25"
     `maven-publish`
-    id("build-logic")
 }
 
 group = "mirrg.kotlin"
