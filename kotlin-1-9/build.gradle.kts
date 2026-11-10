@@ -1,6 +1,3 @@
-
-fun String.uppercaseFirstChar() = this.take(1).uppercase() + this.drop(1)
-
 plugins {
     kotlin("multiplatform") version "1.9.25"
     `maven-publish`
@@ -54,44 +51,10 @@ kotlin {
     //@OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
     //wasmWasi()
 
-    fun org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet.setGeneration() {
-        val sourceSetName = name
-        val generateTask = project.tasks.register("generate${sourceSetName.uppercaseFirstChar()}KotlinSources") {
-            group = "generation"
-
-            val inputDir = outerProjectDirectory.dir("template/src/$sourceSetName/template")
-            val outputDir = project.layout.projectDirectory.dir("generated/$sourceSetName/kotlin")
-
-            val inputFiles = project.fileTree(inputDir) { include("**/*.kt") }
-            inputs.files(inputFiles)
-            outputs.dir(outputDir)
-
-            doLast {
-                val oldOutputFiles: MutableList<File> = project.fileTree(outputDir).filter { it.isFile }.toMutableList()
-                inputFiles.forEach { inputFile ->
-                    val outputFile = outputDir.file(inputFile.relativeTo(inputDir.asFile).invariantSeparatorsPath).asFile
-
-                    println("Generating $outputFile")
-                    val input = inputFile.readText()
-                    outputFile.parentFile.mkdirs()
-                    outputFile.writeText(input)
-
-                    oldOutputFiles.remove(outputFile)
-                }
-                oldOutputFiles.forEach {
-                    println("Deleting $it")
-                    it.delete()
-                }
-            }
-        }
-        project.tasks.named("generate").configure { dependsOn(generateTask) }
-        kotlin.setSrcDirs(listOf(generateTask))
-    }
-
     sourceSets {
         @Suppress("unused")
         val commonMain by getting {
-            setGeneration()
+            kotlin.setSrcDirs(listOf("generated/commonMain/kotlin"))
         }
 
         @Suppress("unused")
@@ -99,7 +62,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
             }
-            setGeneration()
+            kotlin.setSrcDirs(listOf("generated/commonTest/kotlin"))
         }
     }
 }

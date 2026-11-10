@@ -4,15 +4,6 @@ plugins {
     java
 }
 
-sourceSets {
-    register("commonMain") {
-        resources.srcDir("template/src/commonMain/template")
-    }
-    register("commonTest") {
-        resources.srcDir("template/src/commonTest/template")
-    }
-}
-
 tasks.register("generate") {
     group = "generation"
 }
@@ -65,24 +56,6 @@ fun configureVariant(
         configureTask("build", "build")
         configureTask("publishing", "publish")
     }
-
-    val generateVariantBuildScriptsTask = tasks.register("generate${variantSlug}BuildScripts") {
-        group = "generation"
-        val templateDir = project.layout.projectDirectory.dir("template")
-        val inputFiles = project.fileTree(templateDir) { include("*.kts") }
-        inputs.files(inputFiles)
-        outputs.dir(variantDir)
-        doLast {
-            inputFiles.files.forEach { inputFile ->
-                val outputFile = variantDir.file(inputFile.name).asFile
-                logger.lifecycle("Generating {}", outputFile)
-                val input = inputFile.readText()
-                outputFile.parentFile.mkdirs()
-                outputFile.writeText(input)
-            }
-        }
-    }
-    generateVariantWorkspaceTask.configure { dependsOn(generateVariantBuildScriptsTask) }
 
     val generateVariantWrapperTask = tasks.register<Wrapper>("generate${variantSlug}Wrapper") {
         group = "generation"
