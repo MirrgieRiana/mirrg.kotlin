@@ -13,10 +13,6 @@ repositories {
     mavenCentral()
 }
 
-tasks.register("generate") {
-    group = "generation"
-}
-
 kotlin {
     jvm()
     js {
