@@ -7,8 +7,6 @@ group = "mirrg.kotlin"
 val envVersion = System.getenv("VERSION") ?: ""
 if (envVersion.isNotBlank()) version = envVersion
 
-val outerProjectDirectory = rootProject.layout.projectDirectory.dir("..")
-
 repositories {
     mavenCentral()
 }
@@ -74,7 +72,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEa
 }
 
 tasks.withType<Jar>().configureEach {
-    from(outerProjectDirectory.file("LICENSE")) {
+    from(layout.projectDirectory.file("LICENSE")) {
         into("META-INF")
         rename { "LICENSE" }
     }
@@ -85,7 +83,7 @@ publishing {
         maven {
             name = "localFolder"
             val envMavenDir = System.getenv("MAVEN_DIR") ?: ""
-            url = if (envMavenDir.isNotBlank()) uri(file(envMavenDir)) else uri(outerProjectDirectory.dir("maven"))
+            url = if (envMavenDir.isNotBlank()) uri(file(envMavenDir)) else uri(layout.projectDirectory.dir("maven"))
         }
     }
 }
