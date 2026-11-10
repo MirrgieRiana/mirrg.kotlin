@@ -1,42 +1,91 @@
-import org.gradle.kotlin.dsl.support.uppercaseFirstChar
-
 plugins {
-    java
+    kotlin("multiplatform") version "1.9.25"
+    `maven-publish`
+}
+
+group = "mirrg.kotlin"
+val envVersion = System.getenv("VERSION") ?: ""
+if (envVersion.isNotBlank()) version = envVersion
+
+val outerProjectDirectory = rootProject.layout.projectDirectory.dir("..")
+
+repositories {
+    mavenCentral()
 }
 
 tasks.register("generate") {
     group = "generation"
 }
 
-tasks.register("publish") {
-    group = "publishing"
+kotlin {
+    jvm()
+    js {
+        browser()
+        nodejs()
+    }
+    linuxX64()
+    linuxArm64()
+    mingwX64()
+    //macosX64()
+    //macosArm64()
+    //androidNativeArm32()
+    //androidNativeArm64()
+    //androidNativeX86()
+    //androidNativeX64()
+    //iosX64()
+    //iosArm64()
+    //iosSimulatorArm64()
+    //tvosX64()
+    //tvosArm64()
+    //tvosSimulatorArm64()
+    //watchosX64()
+    //watchosArm64()
+    //watchosSimulatorArm64()
+    //watchosArm32()
+    //@OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
+    //wasmJs {
+    //    browser()
+    //    nodejs()
+    //    d8()
+    //}
+    //@OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
+    //wasmWasi()
+
+    sourceSets {
+        @Suppress("unused")
+        val commonMain by getting {
+            kotlin.setSrcDirs(listOf("generated/commonMain/kotlin"))
+        }
+
+        @Suppress("unused")
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+            kotlin.setSrcDirs(listOf("generated/commonTest/kotlin"))
+        }
+    }
 }
 
-
-val variantDir = project.layout.projectDirectory.dir("kotlin-1-9")
-
-// Variantプロジェクトのタスクのブリッジ
-run {
-    fun configureTask(group: String, taskName: String) {
-        val execTask = tasks.register<Exec>("exec${taskName.uppercaseFirstChar()}Kotlin19") {
-            this.group = group
-            workingDir = variantDir.asFile
-            val isWindows = System.getProperty("os.name").contains("windows", ignoreCase = true)
-            if (isWindows) {
-                commandLine("cmd", "/c", variantDir.file("gradlew.bat").asFile.absolutePath, taskName)
-            } else {
-                doFirst {
-                    variantDir.file("gradlew").asFile.setExecutable(true)
-                }
-                commandLine(variantDir.file("gradlew").asFile.absolutePath, taskName)
-            }
-        }
-        tasks.named(taskName).configure { dependsOn(execTask) }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "21"
     }
-    configureTask("generation", "generate")
-    configureTask("build", "clean")
-    configureTask("build", "assemble")
-    configureTask("verification", "check")
-    configureTask("build", "build")
-    configureTask("publishing", "publish")
+}
+
+tasks.withType<Jar>().configureEach {
+    from(outerProjectDirectory.file("LICENSE")) {
+        into("META-INF")
+        rename { "LICENSE" }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "localFolder"
+            val envMavenDir = System.getenv("MAVEN_DIR") ?: ""
+            url = if (envMavenDir.isNotBlank()) uri(file(envMavenDir)) else uri(outerProjectDirectory.dir("maven"))
+        }
+    }
 }
