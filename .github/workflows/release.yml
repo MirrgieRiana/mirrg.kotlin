@@ -1,4 +1,4 @@
-name: release
+name: リリース
 
 on:
   push:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   release:
-    name: release
+    name: リリース
     runs-on: ubuntu-latest
     steps:
       - name: リポジトリのチェックアウト
@@ -37,8 +37,8 @@ jobs:
             exit 1
           fi
 
-          git fetch --no-tags origin helium
-          if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/helium"
+          git fetch --no-tags origin lithium
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" "origin/lithium"
           then
             echo "Invalid branch" >&2
             exit 1
@@ -50,7 +50,7 @@ jobs:
       - name: Javaのセットアップ
         uses: actions/setup-java@v4
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
           cache: gradle
 
@@ -67,14 +67,7 @@ jobs:
           VERSION: ${{ steps.verify.outputs.version }}
         working-directory: build
         run: |
-          chmod +x gradlew
-          ./gradlew --no-daemon execPublishKotlin16
-          ./gradlew --no-daemon execPublishKotlin17
-          ./gradlew --no-daemon execPublishKotlin18
-          ./gradlew --no-daemon execPublishKotlin19
-          ./gradlew --no-daemon execPublishKotlin20
-          ./gradlew --no-daemon execPublishKotlin21
-          ./gradlew --no-daemon execPublishKotlin22
+          ./gradlew --no-daemon build publish
 
       - name: コミットおよびプッシュ
         run: |
@@ -89,5 +82,5 @@ jobs:
           git add -A
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'mirrg.kotlin.helium ${{ steps.verify.outputs.version }} from ${{ steps.verify.outputs.hash }}'
+          git commit -m 'mirrg.kotlin.lithium ${{ steps.verify.outputs.version }} from ${{ steps.verify.outputs.hash }}'
           git push origin maven
