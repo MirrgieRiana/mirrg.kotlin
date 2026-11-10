@@ -1,5 +1,3 @@
-import org.gradle.api.attributes.java.TargetJvmVersion
-
 plugins {
     kotlin("multiplatform") version "1.9.25"
     `maven-publish`
@@ -50,16 +48,10 @@ kotlin {
 
     sourceSets {
         @Suppress("unused")
-        val commonMain by getting {
-            kotlin.setSrcDirs(listOf("generated/commonMain/kotlin"))
-        }
-
-        @Suppress("unused")
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
             }
-            kotlin.setSrcDirs(listOf("generated/commonTest/kotlin"))
         }
     }
 }
