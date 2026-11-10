@@ -1,0 +1,113 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.lithium/5.0.0/mirrg.kotlin.lithium-5.0.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.lithium",
+    "version": "5.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-dom-api-compat",
+          "version": {
+            "requires": "1.9.25"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-js-5.0.0.klib",
+          "url": "mirrg.kotlin.lithium-js-5.0.0.klib",
+          "size": 39152,
+          "sha512": "8d2e2226a747b1dcde4d8670334f139ab668b476d2fa27e22fdbfdcd3ca98857f2ac0a8b2deee4cd43143fbeb7bf867706247ee842c9cd2dbe3fb605914548bc",
+          "sha256": "11ec890a7c763ad65d2af6a8ebdc2c3105f3e76f8649acbc9f85272e850cd94b",
+          "sha1": "59a29e5a6e0c273516b8610028ecd37086485fe6",
+          "md5": "65ab0e582d9be27bbd5a4b9fb0a27f57"
+        }
+      ]
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-dom-api-compat",
+          "version": {
+            "requires": "1.9.25"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-js-5.0.0.klib",
+          "url": "mirrg.kotlin.lithium-js-5.0.0.klib",
+          "size": 39152,
+          "sha512": "8d2e2226a747b1dcde4d8670334f139ab668b476d2fa27e22fdbfdcd3ca98857f2ac0a8b2deee4cd43143fbeb7bf867706247ee842c9cd2dbe3fb605914548bc",
+          "sha256": "11ec890a7c763ad65d2af6a8ebdc2c3105f3e76f8649acbc9f85272e850cd94b",
+          "sha1": "59a29e5a6e0c273516b8610028ecd37086485fe6",
+          "md5": "65ab0e582d9be27bbd5a4b9fb0a27f57"
+        }
+      ]
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-js-5.0.0-sources.jar",
+          "url": "mirrg.kotlin.lithium-js-5.0.0-sources.jar",
+          "size": 9966,
+          "sha512": "73e2b20e39fe8d7553495de89edfaf6842fed17c235352dcbb0db5843e36ab62578080b4ef3d60bb034f28e175186668110148eb56f488d1582ebae9f8e45d34",
+          "sha256": "b44aa09abcc8e99a4349c102ba5aab042d486f342ed663c8e0c76f74a44b5ac6",
+          "sha1": "555458271a2e1c64dbe8071b4c5d538f27a76199",
+          "md5": "67764edb3f8cb5aaf3ff2421ff40f35e"
+        }
+      ]
+    }
+  ]
+}

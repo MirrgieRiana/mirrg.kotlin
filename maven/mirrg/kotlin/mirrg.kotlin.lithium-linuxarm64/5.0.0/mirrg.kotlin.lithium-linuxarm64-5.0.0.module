@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.lithium/5.0.0/mirrg.kotlin.lithium-5.0.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.lithium",
+    "version": "5.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium.klib",
+          "url": "mirrg.kotlin.lithium-linuxarm64-5.0.0.klib",
+          "size": 36722,
+          "sha512": "ab46d9a44d8ddd71724b9820448a3ac227d4d5f5c410ed114a12db4d304a859e8565319e7ecc40a7a4797c611a56ebd7cbb719d77f80bdf99c81082808d5024e",
+          "sha256": "2ddae45b92d95e6a68aba18f6412bd0089d6a7daa0e4346a7a4f266074aee0e2",
+          "sha1": "c0b9041651f45d0db901b58896f5f14b1f562ce1",
+          "md5": "f45fae7c55a6bc44fb661e174c94c567"
+        }
+      ]
+    },
+    {
+      "name": "linuxArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-linuxarm64-5.0.0-sources.jar",
+          "url": "mirrg.kotlin.lithium-linuxarm64-5.0.0-sources.jar",
+          "size": 9966,
+          "sha512": "73e2b20e39fe8d7553495de89edfaf6842fed17c235352dcbb0db5843e36ab62578080b4ef3d60bb034f28e175186668110148eb56f488d1582ebae9f8e45d34",
+          "sha256": "b44aa09abcc8e99a4349c102ba5aab042d486f342ed663c8e0c76f74a44b5ac6",
+          "sha1": "555458271a2e1c64dbe8071b4c5d538f27a76199",
+          "md5": "67764edb3f8cb5aaf3ff2421ff40f35e"
+        }
+      ]
+    }
+  ]
+}

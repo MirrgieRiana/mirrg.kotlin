@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.lithium/5.0.0/mirrg.kotlin.lithium-5.0.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.lithium",
+    "version": "5.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "mingwX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium.klib",
+          "url": "mirrg.kotlin.lithium-mingwx64-5.0.0.klib",
+          "size": 36706,
+          "sha512": "be46d2faef0ce707988ca73404a8e5f0761b63139e8714308c09201bd09e1bb498c9d5705d092443a0c431ff5ba02da9c8d82b80c2d46d4f666f1c9b75832517",
+          "sha256": "ee165e7baba15ee829ddc6b1770f7d8b43f26902f4ce5a5cc55e44fed3021ba6",
+          "sha1": "fd4de753f375b231a6d1e38118c2b6e2e79a5c74",
+          "md5": "ef2fdd40ea0a9a8670bda7cf9de498b5"
+        }
+      ]
+    },
+    {
+      "name": "mingwX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-mingwx64-5.0.0-sources.jar",
+          "url": "mirrg.kotlin.lithium-mingwx64-5.0.0-sources.jar",
+          "size": 9966,
+          "sha512": "73e2b20e39fe8d7553495de89edfaf6842fed17c235352dcbb0db5843e36ab62578080b4ef3d60bb034f28e175186668110148eb56f488d1582ebae9f8e45d34",
+          "sha256": "b44aa09abcc8e99a4349c102ba5aab042d486f342ed663c8e0c76f74a44b5ac6",
+          "sha1": "555458271a2e1c64dbe8071b4c5d538f27a76199",
+          "md5": "67764edb3f8cb5aaf3ff2421ff40f35e"
+        }
+      ]
+    }
+  ]
+}

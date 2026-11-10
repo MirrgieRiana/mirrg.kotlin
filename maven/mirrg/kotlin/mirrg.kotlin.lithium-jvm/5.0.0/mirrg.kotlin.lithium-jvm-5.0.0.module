@@ -1,0 +1,102 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.lithium/5.0.0/mirrg.kotlin.lithium-5.0.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.lithium",
+    "version": "5.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-jvm-5.0.0.jar",
+          "url": "mirrg.kotlin.lithium-jvm-5.0.0.jar",
+          "size": 39137,
+          "sha512": "cc1688c4ebcbe5493816847e50bc722fb9c29e9fc8212dace117d33cf769a753eea405c02477284256c59480bb479abccb8f62b1e94adc374b41f8730afdbdae",
+          "sha256": "df709cada8a343358b0e91d657413706bc06be4f1ea253acf8e439fdc517c7c5",
+          "sha1": "456335c40a3cdc1bad0df0374e15a3057afd4c15",
+          "md5": "91edb9beded892e3b8dd3d8cdfddc931"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-jvm-5.0.0.jar",
+          "url": "mirrg.kotlin.lithium-jvm-5.0.0.jar",
+          "size": 39137,
+          "sha512": "cc1688c4ebcbe5493816847e50bc722fb9c29e9fc8212dace117d33cf769a753eea405c02477284256c59480bb479abccb8f62b1e94adc374b41f8730afdbdae",
+          "sha256": "df709cada8a343358b0e91d657413706bc06be4f1ea253acf8e439fdc517c7c5",
+          "sha1": "456335c40a3cdc1bad0df0374e15a3057afd4c15",
+          "md5": "91edb9beded892e3b8dd3d8cdfddc931"
+        }
+      ]
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-jvm-5.0.0-sources.jar",
+          "url": "mirrg.kotlin.lithium-jvm-5.0.0-sources.jar",
+          "size": 9966,
+          "sha512": "73e2b20e39fe8d7553495de89edfaf6842fed17c235352dcbb0db5843e36ab62578080b4ef3d60bb034f28e175186668110148eb56f488d1582ebae9f8e45d34",
+          "sha256": "b44aa09abcc8e99a4349c102ba5aab042d486f342ed663c8e0c76f74a44b5ac6",
+          "sha1": "555458271a2e1c64dbe8071b4c5d538f27a76199",
+          "md5": "67764edb3f8cb5aaf3ff2421ff40f35e"
+        }
+      ]
+    }
+  ]
+}

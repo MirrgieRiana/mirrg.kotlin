@@ -1,0 +1,71 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../mirrg.kotlin.lithium/5.0.0/mirrg.kotlin.lithium-5.0.0.module",
+    "group": "mirrg.kotlin",
+    "module": "mirrg.kotlin.lithium",
+    "version": "5.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "linuxX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.25"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium.klib",
+          "url": "mirrg.kotlin.lithium-linuxx64-5.0.0.klib",
+          "size": 36705,
+          "sha512": "c5a8f0b3ed821e52fc9e9f9539ecf41817d325d79dede708d48ec72ca23a637c2d886962b15ca41b3a3468e56069a71bb191c38ceb2da72930bfb89d8cd7e748",
+          "sha256": "e33b8383c2192e90a9608abaeb2c4a9fd1c0378c996da81938701e5a0dd60a74",
+          "sha1": "dbccfdbce21703ec7b73e367377bcb81dfc7ec3f",
+          "md5": "b85fb547b7256746d7ff5c70d1c332c5"
+        }
+      ]
+    },
+    {
+      "name": "linuxX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "mirrg.kotlin.lithium-linuxx64-5.0.0-sources.jar",
+          "url": "mirrg.kotlin.lithium-linuxx64-5.0.0-sources.jar",
+          "size": 9966,
+          "sha512": "73e2b20e39fe8d7553495de89edfaf6842fed17c235352dcbb0db5843e36ab62578080b4ef3d60bb034f28e175186668110148eb56f488d1582ebae9f8e45d34",
+          "sha256": "b44aa09abcc8e99a4349c102ba5aab042d486f342ed663c8e0c76f74a44b5ac6",
+          "sha1": "555458271a2e1c64dbe8071b4c5d538f27a76199",
+          "md5": "67764edb3f8cb5aaf3ff2421ff40f35e"
+        }
+      ]
+    }
+  ]
+}
