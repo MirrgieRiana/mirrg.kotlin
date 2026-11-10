@@ -17,15 +17,10 @@ val generateWorkspacesTask = tasks.register("generateWorkspaces") {
     group = "generation"
 }
 
-fun configureVariant(
-    variantSuffix: String,
-    gradleVersion: String,
-    gradleJavaVersion: Int,
-) {
-    val variantSlug = variantSuffix.replace("-", "").uppercaseFirstChar()
-    val variantDir = project.layout.projectDirectory.dir(variantSuffix)
+run {
+    val variantDir = project.layout.projectDirectory.dir("kotlin-1-9")
 
-    val generateVariantWorkspaceTask = tasks.register("generate${variantSlug}Workspace") {
+    val generateVariantWorkspaceTask = tasks.register("generateKotlin19Workspace") {
         group = "generation"
     }
     generateWorkspacesTask.configure { dependsOn(generateVariantWorkspaceTask) }
@@ -33,7 +28,7 @@ fun configureVariant(
     // Variantプロジェクトのタスクのブリッジ
     run {
         fun configureTask(group: String, taskName: String) {
-            val execTask = tasks.register<Exec>("exec${taskName.uppercaseFirstChar()}${variantSlug}") {
+            val execTask = tasks.register<Exec>("exec${taskName.uppercaseFirstChar()}Kotlin19") {
                 this.group = group
                 workingDir = variantDir.asFile
                 val isWindows = System.getProperty("os.name").contains("windows", ignoreCase = true)
@@ -57,16 +52,16 @@ fun configureVariant(
         configureTask("publishing", "publish")
     }
 
-    val generateVariantWrapperTask = tasks.register<Wrapper>("generate${variantSlug}Wrapper") {
+    val generateVariantWrapperTask = tasks.register<Wrapper>("generateKotlin19Wrapper") {
         group = "generation"
         scriptFile = variantDir.file("gradlew").asFile
         jarFile = variantDir.file("gradle/wrapper/gradle-wrapper.jar").asFile
-        this.gradleVersion = gradleVersion
+        gradleVersion = "8.14.3"
         distributionType = Wrapper.DistributionType.BIN
     }
     generateVariantWorkspaceTask.configure { dependsOn(generateVariantWrapperTask) }
 
-    val generateVariantGradlePropertiesTask = tasks.register("generate${variantSlug}GradleProperties") {
+    val generateVariantGradlePropertiesTask = tasks.register("generateKotlin19GradleProperties") {
         group = "generation"
         val outputFile = variantDir.file("gradle.properties").asFile
         outputs.file(outputFile)
@@ -74,7 +69,7 @@ fun configureVariant(
             logger.lifecycle("Generating {}", outputFile)
             val properties = mapOf(
                 "org.gradle.java.home" to javaToolchains.launcherFor {
-                    languageVersion = JavaLanguageVersion.of(gradleJavaVersion)
+                    languageVersion = JavaLanguageVersion.of(21)
                 }.get().metadata.installationPath.asFile.absolutePath,
                 "org.gradle.jvmargs" to "-Xmx4g -XX:MaxMetaspaceSize=1g",
             )
@@ -88,4 +83,3 @@ fun configureVariant(
     generateVariantWorkspaceTask.configure { dependsOn(generateVariantGradlePropertiesTask) }
 
 }
-configureVariant("kotlin-1-9", "8.14.3", 21)
