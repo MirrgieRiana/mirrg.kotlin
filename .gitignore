@@ -1,7 +1,9 @@
-.gradle
-/.idea
-build
-.kotlin
-kotlin-js-store
-java_pid*.hprof
-/kotlin-*-*/gradle.properties
+
+/build/
+/.gradle/
+
+/.kotlin/
+/kotlin-js-store/
+
+/.idea/
+/java_pid*.hprof
