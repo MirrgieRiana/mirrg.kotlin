@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+import org.gradle.api.attributes.java.TargetJvmVersion
 
 plugins {
     kotlin("multiplatform") version "1.9.25"
@@ -10,7 +10,12 @@ val envVersion = System.getenv("VERSION") ?: ""
 if (envVersion.isNotBlank()) version = envVersion
 
 kotlin {
-    jvm()
+    val jvmVersion = 21
+    jvmToolchain(jvmVersion)
+
+    jvm {
+        attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, jvmVersion)
+    }
     js {
         browser()
         nodejs()
@@ -56,12 +61,6 @@ kotlin {
             }
             kotlin.setSrcDirs(listOf("generated/commonTest/kotlin"))
         }
-    }
-}
-
-tasks.withType<KotlinJvmCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = "21"
     }
 }
 
