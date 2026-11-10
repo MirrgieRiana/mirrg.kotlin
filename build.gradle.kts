@@ -9,10 +9,6 @@ group = "mirrg.kotlin"
 val envVersion = System.getenv("VERSION") ?: ""
 if (envVersion.isNotBlank()) version = envVersion
 
-repositories {
-    mavenCentral()
-}
-
 kotlin {
     jvm()
     js {
