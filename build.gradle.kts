@@ -64,7 +64,8 @@ kotlin {
     }
 }
 
-tasks.withType<Jar>().configureEach {
+// 指定しなければ暗黙の org.gradle.api.tasks.bundling.Jar の方が読み込まれて指定範囲が狭まる
+tasks.withType<org.gradle.jvm.tasks.Jar>().configureEach {
     from(layout.projectDirectory.file("LICENSE")) {
         into("META-INF")
         rename { "LICENSE" }
