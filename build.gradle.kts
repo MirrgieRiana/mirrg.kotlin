@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     kotlin("multiplatform") version "1.9.25"
     `maven-publish`
@@ -65,7 +67,7 @@ kotlin {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+tasks.withType<KotlinJvmCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "21"
     }
