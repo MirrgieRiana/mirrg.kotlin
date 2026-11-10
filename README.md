@@ -31,11 +31,3 @@ dependencies {
     implementation("mirrg.kotlin:mirrg.kotlin.lithium:<version>")
 }
 ```
-
-### Kotlin Version Compatibility
-
-The Kotlin compiler version each library release is built with.
-
-| Artifact ID          | Version | Kotlin Version |
-|----------------------|---------|----------------|
-| mirrg.kotlin.lithium | 4.6.0   | 1.9.25         |
